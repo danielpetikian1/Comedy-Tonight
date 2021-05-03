@@ -1,4 +1,5 @@
 import json
+from os import error
 import random
 
 
@@ -22,27 +23,34 @@ class ScriptDB:
             else:
                 return False
 
-    # return some random animal
-    def generate_random_animal(self) -> str:
-        # update the current animal
+    # set some random animal (pseudo-setter)
+    def set_random_animal(self) -> str:
+        # update the current animal to be a random choice inside of animals db
         self.current_animal = random.choices(self.animals)
-        return self.current_animal
 
-    # TODO: concat some new animal to a what sentence
+    # concat a new animal to a what sentence
     def generate_what_sentence(self) -> str:
-        return "TODO"
+        # generate a random animal
+        self.set_random_animal()
+        random_what_sentence = random.choices(self.what_sentences)
+        output = random_what_sentence + self.current_animal
+        return "".join(output)
 
     """ 
     TODO: loop up the current animal, find the fact corresponding with it,
     TODO: and return the sentence
     """
     def generate_why_sentence(self) -> str:
+        if self.current_animal is None:
+            current_animal = self.current_animal
+        else:
+            raise Exception("Error: current animal is null")
         return "TODO"
 
     # find the current index of the animal (brute force and shitty)
     def current_animal_index(self) -> int:
-        if self.current_animal == None:
-            return 0
+        if self.current_animal is None:
+            raise Exception("Error: current animal is null")
         for i in self.animals:
             if self.animals[i] == self.current_animal:
                 return i
