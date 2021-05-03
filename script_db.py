@@ -9,6 +9,7 @@ class ScriptDB:
         # open and process file
         with open(path) as f:
             json_data = json.load(f)
+            self.json_data = json_data
             self.animals = json_data["animals"]
             self.what_sentences = json_data["What sentences"]
             self.why_sentences = json_data["Why sentences"]
@@ -32,13 +33,12 @@ class ScriptDB:
     TODO: loop up the current animal, find the fact corresponding with it,
     TODO: and return the sentence
     """
-
     def generate_why_sentence(self) -> str:
-        if self.current_animal is None:
-            current_animal = self.current_animal
-        else:
+        if self.current_animal == None:
             raise Exception("Error: current animal is null")
-        return "TODO"
+        current_animal = self.current_animal
+        why_sentence = self.json_data["Why sentences"]["".join(current_animal)]
+        return "".join(why_sentence)
 
     # find the current index of the animal (brute force and shitty)
     def current_animal_index(self) -> int:
