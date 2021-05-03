@@ -16,5 +16,4 @@ class ScriptDB:
             if i in item:
                 return True
             else:
-                # item was not in collection
                 return False
