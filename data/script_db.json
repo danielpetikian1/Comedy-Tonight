@@ -134,5 +134,11 @@
     "woodchuck",
     "yak",
     "zebra"
-  ]
+  ],
+  "What sentences": [
+    "I got a ",
+    "My favorite animal is the ",
+    "Ooooh, well see I got a "
+  ],
+  "Why sentences": ["FILL ME OUT FOR EACH ANIMAL"]
 }
