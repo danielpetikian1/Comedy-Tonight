@@ -15,14 +15,6 @@ class ScriptDB:
             self.current_animal = None
             self.current_description = None
 
-    # boolean checker to see if some attribute is present in some collection
-    def present_in_collection(self, item, collection) -> bool:
-        for i in collection:
-            if i in item:
-                return True
-            else:
-                return False
-
     # set some random animal (pseudo-setter)
     def set_random_animal(self) -> str:
         # update the current animal to be a random choice inside of animals db
@@ -40,6 +32,7 @@ class ScriptDB:
     TODO: loop up the current animal, find the fact corresponding with it,
     TODO: and return the sentence
     """
+
     def generate_why_sentence(self) -> str:
         if self.current_animal is None:
             current_animal = self.current_animal
@@ -56,3 +49,11 @@ class ScriptDB:
                 return i
             else:
                 return 0
+
+    # boolean checker to see if some attribute is present in some collection
+    def present_in_collection(self, item, collection) -> bool:
+        for i in collection:
+            if i in item:
+                return True
+            else:
+                return False
