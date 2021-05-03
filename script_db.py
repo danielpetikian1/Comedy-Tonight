@@ -2,7 +2,6 @@ import json
 
 
 class ScriptDB:
-    # initialize the animals_db JSON file
     # later, this can be renamed to a more general db of more than just animals
     def __init__(self, path: str) -> None:
         # open and process file
