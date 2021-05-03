@@ -6,8 +6,8 @@ def main():
 
     # for 10 back in forth messages
     for i in range(0, 10):
-        print(agent_1.generate_random_animal())
-        print(agent_2.generate_random_animal())
+        print(agent_1.generate_what_sentence())
+        print(agent_2.generate_what_sentence())
 
 if __name__ == "__main__":
     main()
