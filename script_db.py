@@ -34,7 +34,7 @@ class ScriptDB:
     TODO: and return the sentence
     """
     def generate_why_sentence(self) -> str:
-        if self.current_animal == None:
+        if self.current_animal is None:
             raise Exception("Error: current animal is null")
         current_animal = self.current_animal
         why_sentence = self.json_data["Why sentences"]["".join(current_animal)]
