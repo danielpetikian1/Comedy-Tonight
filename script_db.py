@@ -30,8 +30,8 @@ class ScriptDB:
         return "".join(output)
 
     """ 
-    TODO: loop up the current animal, find the fact corresponding with it,
-    TODO: and return the sentence
+    loop up the current animal, find the fact corresponding with it,
+    and return the sentence
     """
     def generate_why_sentence(self) -> str:
         if self.current_animal is None:
