@@ -1,5 +1,4 @@
 import json
-from os import error
 import random
 
 
@@ -13,8 +12,9 @@ class ScriptDB:
             self.animals = json_data["animals"]
             self.what_sentences = json_data["What sentences"]
             self.why_sentences = json_data["Why sentences"]
-            self.current_animal = None
-            self.current_description = None
+        # other inits
+        self.current_animal = None
+        self.current_description = None
 
     # set some random animal (pseudo-setter)
     def set_random_animal(self) -> str:
