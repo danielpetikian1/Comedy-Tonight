@@ -17,3 +17,8 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+### Questions
+
+# 1) How do we define the problem for something like this? Harder to do in this case (how is script generation a problem for ppl)
