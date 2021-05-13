@@ -1,22 +1,22 @@
 from nltk.corpus import wordnet
 
-lion_synset = wordnet.synsets("Lion")
+lion_synset = wordnet.synsets("Program")
 
 # synset
-print(lion_synset)
+print("Synset: ", lion_synset)
 
 # the word
-print(lion_synset[0].name())
+print("The word: ", lion_synset[0].name())
 
 # definition
-print(lion_synset[0].definition())
+print("The definition: ", lion_synset[0].definition())
 
 # some examples
 print("Examples: ", lion_synset[0].examples())
 
 synonyms = []
 antonyms = []
-word = "Great"
+word = "Got"
 
 # find the synonyms and antonyms of the word variable
 for syn in wordnet.synsets(word):
