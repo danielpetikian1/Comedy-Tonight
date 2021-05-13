@@ -6,27 +6,45 @@ def main():
     agent_2 = Agent()
     # keep track of already mentioned animals (todo)
     animal_dict = {}
+    iterations: int = 0
     print("Comedy Tonight Script Generator v1.0: \n")
-    for _ in range(0, 10):
+    while iterations < 8:
         # check to see if the current animal is not none
+        temp_agent_one_animal: str = None
         if agent_2.get_current_animal is not None:
-            agent_one_animal: str = agent_1.generate_what_sentence()
+            temp_agent_one_animal = agent_1.generate_what_sentence()
+            if temp_agent_one_animal not in animal_dict:
+                agent_one_animal: str = temp_agent_one_animal
+            else:
+                # the animal was in the dict, continue
+                continue
         else:
             agent_one_animal: str = agent_1.generate_what_sentence(
                 agent_2.get_current_animal
             )
+        # add this to the animal dictionary
+        animal_dict[agent_one_animal] = agent_one_animal
         agent_one_why: str = agent_1.generate_why_sentence()
         # print to console
         print(f"{agent_one_animal} - {agent_one_why} \n")
+        ### NOW FOR AGENT TWO
+        temp_agent_two_animal: str = None
         if agent_1.get_current_animal is not None:
-            agent_two_animal: str = agent_2.generate_what_sentence()
+            temp_agent_two_animal = agent_2.generate_what_sentence()
+            if temp_agent_two_animal not in animal_dict:
+                agent_two_animal: str = temp_agent_two_animal
+            else:
+                continue
         else:
             agent_two_animal: str = agent_2.generate_what_sentence(
                 agent_1.get_current_animal
             )
+        # add this to the animal dictionary
+        animal_dict[agent_two_animal] = agent_two_animal
         agent_two_why: str = agent_2.generate_why_sentence()
         # print to console
         print(f"{agent_two_animal} - {agent_two_why} \n")
+        iterations += 1
 
 
 if __name__ == "__main__":

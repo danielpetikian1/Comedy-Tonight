@@ -25,14 +25,14 @@ class Agent:
         # if an arg was not provided, it is the first run
         if animal == "":
             self.current_animal = random.choice(
-                get_related_to(random.choice(get_animals_from_type("cat")))
+                get_related_to(random.choice(get_animals_from_type("bird")))
             )
             return self.current_animal
         # if the first run
         else:
             # get the type of the previous animal
             self.current_animal = random.choice(get_types_from_animal(animal))
-            return self.current_animal
+            self.get_current_animal()
 
     def generate_why_sentence(self) -> str:
         """
