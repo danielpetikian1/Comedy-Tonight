@@ -23,15 +23,28 @@ class Agent:
         Returns an animal of the type animal the first time around
         """
         # if an arg was not provided, it is the first run
-        if animal == "":
-            # old query = self.current_animal = random.choice(get_related_to(random.choice(get_animals_from_type("bird"))))
-            self.current_animal = random.choice(get_related_to("bird"))
-            return self.current_animal
-        # if the first run
-        else:
-            # get the type of the previous animal
-            self.current_animal = random.choice(get_types_from_animal(animal))
-            self.get_current_animal()
+        why_exists = False
+        while why_exists == False:
+            if animal == "":
+                # old query = self.current_animal = random.choice(get_related_to(random.choice(get_animals_from_type("bird"))))
+                self.current_animal = random.choice(get_related_to("bird"))
+                if self.check_if_why_exits() == True:
+                    why_exists = True
+                    # return the current animal
+                    self.get_current_animal()
+                # if not, just do it again
+                continue
+
+            # if the first run
+            else:
+                # get the type of the previous animal
+                self.current_animal = random.choice(get_types_from_animal(animal))
+                if self.check_if_why_exits() == True:
+                    why_exists = True
+                    # return the current animal
+                    self.get_current_animal()
+                # if not, continue
+                continue
 
     def generate_why_sentence(self) -> str:
         """
@@ -44,4 +57,14 @@ class Agent:
         else:
             why_sentence = "No reason found!"
         return why_sentence
-    
+
+    def check_if_why_exits(self) -> bool:
+        """
+        Check and see if this animal has some corresponding why sentence
+        If it does, return true, else false
+        """
+        current_animal = self.current_animal
+        why_sentence_choices = get_capable(current_animal)
+        if len(why_sentence_choices) > 0:
+            return True
+        return False
