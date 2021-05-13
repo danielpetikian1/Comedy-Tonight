@@ -1,13 +1,17 @@
 from agent import Agent
+import time
 
 
 def main():
     agent_1 = Agent()
     agent_2 = Agent()
+    # keep track of time of execution
+    start_time = time.time()
     # keep track of already mentioned animals (todo)
     animal_dict = {}
     iterations: int = 0
-    print("Comedy Tonight Script Generator v1.0: \n")
+    print("Comedy Tonight Script Generator v1.1: \n")
+    # number of iterations
     while iterations < 8:
         # check to see if the current animal is not none
         temp_agent_one_animal: str = None
@@ -18,6 +22,7 @@ def main():
             else:
                 # the animal was in the dict, continue
                 continue
+        # temp2 is none
         else:
             agent_one_animal: str = agent_1.generate_what_sentence(
                 agent_2.get_current_animal
@@ -45,6 +50,10 @@ def main():
         # print to console
         print(f"{agent_two_animal} - {agent_two_why} \n")
         iterations += 1
+    # print the time results
+    total_run_time_seconds = time.time() - start_time
+    print(f"TOTAL TIME IN SECONDS: {total_run_time_seconds} seconds")
+    print(f"TOTAL TIME IN MINUTES: {total_run_time_seconds/60} minutes")
 
 
 if __name__ == "__main__":
