@@ -24,9 +24,8 @@ class Agent:
         """
         # if an arg was not provided, it is the first run
         if animal == "":
-            self.current_animal = random.choice(
-                get_related_to(random.choice(get_animals_from_type("bird")))
-            )
+            # old query = self.current_animal = random.choice(get_related_to(random.choice(get_animals_from_type("bird"))))
+            self.current_animal = random.choice(get_related_to("bird"))
             return self.current_animal
         # if the first run
         else:
@@ -45,3 +44,4 @@ class Agent:
         else:
             why_sentence = "No reason found!"
         return why_sentence
+    
