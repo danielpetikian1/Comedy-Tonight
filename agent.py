@@ -1,5 +1,5 @@
 import random
-from testAPI import (
+from concept_net_api import (
     get_capable,
     get_types_from_animal,
     get_animals_from_type,

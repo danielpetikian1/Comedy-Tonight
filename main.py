@@ -1,4 +1,3 @@
-from testAPI import get_animals_from_type, get_types_from_animal
 from agent import Agent
 
 
