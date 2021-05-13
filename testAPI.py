@@ -15,7 +15,7 @@ def main():
     # something brand new
 
 
-def get_capable(animal: str):
+def get_capable(animal: str) -> list:
     """
     function takes in the name of the animal as a string and gives back a list of strings in the form of "can ____"
     """
@@ -30,7 +30,7 @@ def get_capable(animal: str):
     return capabilities
 
 
-def get_types_from_animal(animal: str):
+def get_types_from_animal(animal: str) -> list:
     """
     Given an animal, return types
     """
@@ -44,7 +44,7 @@ def get_types_from_animal(animal: str):
     return types
 
 
-def get_animals_from_type(type: str):
+def get_animals_from_type(type: str) -> list:
     """
     Given some animal, return the types
     """
@@ -56,7 +56,7 @@ def get_animals_from_type(type: str):
     animals = [edge["end"]["label"] for edge in obj["edges"]]
     return animals
 
-def get_related_to(arg: str):
+def get_related_to(arg: str) -> list:
     """
     Given some animal, return animals that are related
     """
