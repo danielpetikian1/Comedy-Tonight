@@ -30,10 +30,11 @@ class Agent:
         while why_exists == False:
             if animal == "":
                 # old query = self.current_animal = random.choice(get_related_to(random.choice(get_animals_from_type("bird"))))
-                temp_animal = random.choice(get_related_to("bird"))
+                animal_query = get_related_to("bird")
+                temp_animal = random.choice(animal_query)
                 if temp_animal not in animal_dict:
                     self.current_animal = temp_animal
-                    # print(self.current_animal)
+                    print(self.current_animal)
                     if self.check_if_why_exits() == True:
                         why_exists = True
                         # return the current animal
@@ -50,7 +51,7 @@ class Agent:
                 temp_animal = random.choice(get_types_from_animal(animal))
                 if temp_animal not in animal_dict:
                     self.current_animal = temp_animal
-                    # print(self.current_animal)
+                    print(self.current_animal)
                     if self.check_if_why_exits() == True:
                         why_exists = True
                         # return the current animal

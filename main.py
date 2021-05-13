@@ -12,7 +12,7 @@ def main():
     iterations: int = 0
     print("Comedy Tonight Script Generator v1.1: \n")
     # number of iterations
-    while iterations < 8:
+    while iterations < 6:
         # check to see if the current animal is not none
         temp_agent_one_animal: str = None
         if agent_2.get_current_animal is not None:
