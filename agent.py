@@ -48,7 +48,8 @@ class Agent:
             # if the first run
             else:
                 # get the type of the previous animal
-                temp_animal = random.choice(get_types_from_animal(animal))
+                animal_query = get_types_from_animal(animal)
+                temp_animal = random.choice(animal_query(animal))
                 if temp_animal not in self.animal_dict:
                     self.current_animal = temp_animal
                     # print(self.current_animal)
