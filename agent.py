@@ -31,37 +31,42 @@ class Agent:
             if animal == "":
                 # old query = self.current_animal = random.choice(get_related_to(random.choice(get_animals_from_type("bird"))))
                 animal_query = get_related_to("bird")
-                temp_animal = random.choice(animal_query)
-                if temp_animal not in self.animal_dict:
-                    self.current_animal = temp_animal
-                    # print(self.current_animal)
-                    if self.check_if_why_exits() == True:
-                        why_exists = True
-                        # return the current animal
-                        return self.current_animal
-                    # if not, just do it again
-                    self.animal_dict[temp_animal] = temp_animal
-                    continue
-                else:
-                    continue
+                for i in range(len(animal_query)):
+                    temp_animal = animal_query[i].lower()
+                    # print(temp_animal)
+                    if temp_animal in self.animal_dict:
+                        continue
+                    else:
+                        self.animal_dict[temp_animal] = temp_animal
+                        self.current_animal = temp_animal
+                        # print(self.current_animal)
+                        if self.check_if_why_exits() == True:
+                            why_exists = True
+                            # return the current animal
+                            return self.current_animal
+                        else:
+                            continue
+                continue
 
             # if the first run
             else:
                 # get the type of the previous animal
                 animal_query = get_types_from_animal(animal)
-                temp_animal = random.choice(animal_query(animal))
-                if temp_animal not in self.animal_dict:
-                    self.current_animal = temp_animal
-                    # print(self.current_animal)
-                    if self.check_if_why_exits() == True:
-                        why_exists = True
-                        # return the current animal
-                        return self.current_animal
-                    # if not, continue
-                    self.animal_dict[temp_animal] = temp_animal
-                    continue
-                else:
-                    continue
+                for i in range(len(animal_query)):
+                    temp_animal = animal_query[i].lower()
+                    if temp_animal in self.animal_dict:
+                        continue
+                    else:
+                        self.animal_dict[temp_animal] = temp_animal
+                        self.current_animal = temp_animal
+                        # print(self.current_animal)
+                        if self.check_if_why_exits() == True:
+                            why_exists = True
+                            # return the current animal
+                            return self.current_animal
+                        else:
+                            continue
+                continue
 
     def generate_why_sentence(self) -> str:
         """
