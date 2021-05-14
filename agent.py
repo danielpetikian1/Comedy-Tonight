@@ -10,6 +10,7 @@ from concept_net_api import (
 class Agent:
     def __init__(self) -> None:
         self.current_animal = None
+        self.animal_dict = {}
 
     def get_current_animal(self):
         """
@@ -24,7 +25,6 @@ class Agent:
 
         IMPROVEMENTS: Make it so we do not call the API after each check for lack of why sentence
         """
-        animal_dict = {}
         # if an arg was not provided, it is the first run
         why_exists = False
         while why_exists == False:
@@ -32,15 +32,15 @@ class Agent:
                 # old query = self.current_animal = random.choice(get_related_to(random.choice(get_animals_from_type("bird"))))
                 animal_query = get_related_to("bird")
                 temp_animal = random.choice(animal_query)
-                if temp_animal not in animal_dict:
+                if temp_animal not in self.animal_dict:
                     self.current_animal = temp_animal
-                    print(self.current_animal)
+                    # print(self.current_animal)
                     if self.check_if_why_exits() == True:
                         why_exists = True
                         # return the current animal
                         return self.current_animal
                     # if not, just do it again
-                    animal_dict[temp_animal] = temp_animal
+                    self.animal_dict[temp_animal] = temp_animal
                     continue
                 else:
                     continue
@@ -49,15 +49,15 @@ class Agent:
             else:
                 # get the type of the previous animal
                 temp_animal = random.choice(get_types_from_animal(animal))
-                if temp_animal not in animal_dict:
+                if temp_animal not in self.animal_dict:
                     self.current_animal = temp_animal
-                    print(self.current_animal)
+                    # print(self.current_animal)
                     if self.check_if_why_exits() == True:
                         why_exists = True
                         # return the current animal
                         return self.current_animal
                     # if not, continue
-                    animal_dict[temp_animal] = temp_animal
+                    self.animal_dict[temp_animal] = temp_animal
                     continue
                 else:
                     continue
