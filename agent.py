@@ -30,7 +30,7 @@ class Agent:
         while why_exists == False:
             if animal == "":
                 # old query = self.current_animal = random.choice(get_related_to(random.choice(get_animals_from_type("bird"))))
-                animal_query = get_related_to("food")
+                animal_query = get_related_to("bird")
                 temp_animal = random.choice(animal_query)
                 if temp_animal not in self.animal_dict:
                     self.current_animal = temp_animal
