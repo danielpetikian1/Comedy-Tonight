@@ -31,6 +31,7 @@ def main():
         animal_dict[agent_one_animal] = agent_one_animal
         agent_one_why: str = agent_1.generate_why_sentence()
         # print to console
+        print("AGENT ONE: ")
         print(f"{agent_one_animal} - {agent_one_why} \n")
         ### NOW FOR AGENT TWO
         temp_agent_two_animal: str = None
@@ -48,6 +49,7 @@ def main():
         animal_dict[agent_two_animal] = agent_two_animal
         agent_two_why: str = agent_2.generate_why_sentence()
         # print to console
+        print("AGENT TWO: ")
         print(f"{agent_two_animal} - {agent_two_why} \n")
         iterations += 1
     # print the time results
