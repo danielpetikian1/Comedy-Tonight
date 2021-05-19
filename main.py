@@ -7,7 +7,7 @@ def main():
     agent_2 = Agent()
     # keep track of time of execution
     start_time = time.time()
-    # keep track of already mentioned animals (todo)
+    # keep track of already mentioned animals
     animal_dict = {}
     iterations: int = 0
     print("Comedy Tonight Script Generator v1.1: \n")
@@ -15,7 +15,7 @@ def main():
     while iterations < 4:
         # check to see if the current animal is not none
         temp_agent_one_animal: str = None
-        if agent_2.get_current_animal is not None:
+        if agent_2.get_current_animal() is not None:
             temp_agent_one_animal = agent_1.generate_what_sentence()
             if temp_agent_one_animal not in animal_dict:
                 agent_one_animal: str = temp_agent_one_animal
@@ -25,7 +25,7 @@ def main():
         # temp2 is none
         else:
             agent_one_animal: str = agent_1.generate_what_sentence(
-                agent_2.get_current_animal
+                agent_2.get_current_animal()
             )
         # add this to the animal dictionary
         animal_dict[agent_one_animal] = agent_one_animal
@@ -35,7 +35,7 @@ def main():
         print(f"{agent_one_animal} - {agent_one_why} \n")
         ### NOW FOR AGENT TWO
         temp_agent_two_animal: str = None
-        if agent_1.get_current_animal is not None:
+        if agent_1.get_current_animal() is not None:
             temp_agent_two_animal = agent_2.generate_what_sentence()
             if temp_agent_two_animal not in animal_dict:
                 agent_two_animal: str = temp_agent_two_animal
@@ -43,7 +43,7 @@ def main():
                 continue
         else:
             agent_two_animal: str = agent_2.generate_what_sentence(
-                agent_1.get_current_animal
+                agent_1.get_current_animal()
             )
         # add this to the animal dictionary
         animal_dict[agent_two_animal] = agent_two_animal

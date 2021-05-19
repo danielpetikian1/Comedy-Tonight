@@ -1,3 +1,4 @@
+from typing import List
 import requests
 
 
@@ -32,7 +33,7 @@ def get_animals_from_loc(loc: str):
     #TODO
     return
 
-def get_capable(animal: str) -> list:
+def get_capable(animal: str) -> List:
     """
     function takes in the name of the animal as a string and gives back a list of strings in the form of "can ____"
     """
@@ -47,7 +48,7 @@ def get_capable(animal: str) -> list:
     return capabilities
 
 
-def get_types_from_animal(animal: str) -> list:
+def get_types_from_animal(animal: str) -> List:
     """
     Given an animal, return types
     """
@@ -77,7 +78,7 @@ def daniels_function(animal: str):
     print(get_capable(get_animals_from_type('big_cat')[0]))
     return
 
-def get_animals_from_type(type: str) -> list:
+def get_animals_from_type(type: str) -> List:
     """
     Given some animal, return the types
     """
@@ -89,7 +90,7 @@ def get_animals_from_type(type: str) -> list:
     animals = [edge["end"]["label"] for edge in obj["edges"]]
     return animals
 
-def get_related_to(arg: str) -> list:
+def get_related_to(arg: str) -> List:
     """
     Given some animal, return animals that are related
     """

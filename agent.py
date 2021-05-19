@@ -18,7 +18,7 @@ class Agent:
         """
         return self.current_animal
 
-    def generate_what_sentence(self, animal: str = "") -> str:
+    def generate_what_sentence(self, animal: str or None = None) -> str:
         """
         Generate what sentence takes a type and returns a new animal of that type
         Returns an animal of the type animal the first time around
@@ -27,9 +27,9 @@ class Agent:
         """
         # if an arg was not provided, it is the first run
         while True:
-            if animal == "":
+            if animal == None:
                 # old query = self.current_animal = random.choice(get_related_to(random.choice(get_animals_from_type("bird"))))
-                animal_query = get_related_to("bird")
+                animal_query = get_related_to("food")
                 temp_animal = random.choice(animal_query)
                 if temp_animal not in self.animal_dict:
                     self.current_animal = temp_animal
@@ -45,8 +45,9 @@ class Agent:
             # if the first run
             else:
                 # get the type of the previous animal
+                print("THIS IS THE ANIMAL BEING GIVEN: ", animal)
                 animal_query = get_types_from_animal(animal)
-                temp_animal = random.choice(animal_query(animal))
+                temp_animal = random.choice(animal_query)
                 if temp_animal not in self.animal_dict:
                     self.current_animal = temp_animal
                     # print(self.current_animal)
