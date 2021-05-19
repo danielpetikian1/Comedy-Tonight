@@ -26,8 +26,7 @@ class Agent:
         IMPROVEMENTS: Make it so we do not call the API after each check for lack of why sentence
         """
         # if an arg was not provided, it is the first run
-        why_exists = False
-        while why_exists == False:
+        while True:
             if animal == "":
                 # old query = self.current_animal = random.choice(get_related_to(random.choice(get_animals_from_type("bird"))))
                 animal_query = get_related_to("bird")
@@ -36,12 +35,10 @@ class Agent:
                     self.current_animal = temp_animal
                     # print(self.current_animal)
                     if self.check_if_why_exits() == True:
-                        why_exists = True
                         # return the current animal
                         return self.current_animal
                     # if not, just do it again
                     self.animal_dict[temp_animal] = temp_animal
-                    continue
                 else:
                     continue
 
@@ -54,12 +51,10 @@ class Agent:
                     self.current_animal = temp_animal
                     # print(self.current_animal)
                     if self.check_if_why_exits() == True:
-                        why_exists = True
                         # return the current animal
                         return self.current_animal
                     # if not, continue
                     self.animal_dict[temp_animal] = temp_animal
-                    continue
                 else:
                     continue
 
