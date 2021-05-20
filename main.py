@@ -38,12 +38,14 @@ def main():
         ### NOW FOR AGENT TWO
         temp_agent_two_animal: str = None
         if agent_1.get_current_animal() is not None:
+            
             temp_agent_two_animal = agent_2.generate_what_sentence()
             if temp_agent_two_animal not in animal_dict:
                 agent_two_animal: str = temp_agent_two_animal
             else:
                 continue
         else:
+            
             agent_two_animal: str = agent_2.generate_what_sentence(
                 agent_1.get_current_animal()
             )
