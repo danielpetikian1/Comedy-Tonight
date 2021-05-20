@@ -5,6 +5,7 @@ import time
 def main():
     agent_1 = Agent()
     agent_2 = Agent()
+    agent_1.domain_switcher = False
     # keep track of time of execution
     start_time = time.time()
     # keep track of already mentioned animals
@@ -13,6 +14,7 @@ def main():
     print("Comedy Tonight Script Generator v1.1: \n")
     # number of iterations
     while iterations < 4:
+        agent_1.domain = agent_2.domain
         # check to see if the current animal is not none
         temp_agent_one_animal: str = None
         if agent_2.get_current_animal() is not None:

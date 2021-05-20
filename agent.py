@@ -11,8 +11,9 @@ class Agent:
     def __init__(self) -> None:
         self.current_animal = None
         self.animal_dict = {}
-        self.counter = 0
-        self.domain = 'big_cat'
+        self.domain_switcher = True
+        self.counter = 1
+        self.domain = 'insect'
         self.domains = ['fish', 'reptile', 'birds', 'mythical_being', 'big_cat', 'insect','canine']
 
     def get_current_animal(self):
@@ -22,6 +23,12 @@ class Agent:
         return self.current_animal
 
     def switch_domain(self):
+        if self.domain_switcher == False:
+            return
+        choice = random.choice(self.domains)
+        while choice == self.domain:
+            choice = random.choice(self.domains)
+        self.domain = choice
         return
 
     def generate_what_sentence(self, animal: str or None = None) -> str:
@@ -31,6 +38,8 @@ class Agent:
 
         IMPROVEMENTS: Make it so we do not call the API after each check for lack of why sentence
         """
+        if self.counter % 3 == 0:
+            self.switch_domain()
         # if an arg was not provided, it is the first run
         while True:
             if animal == None:
