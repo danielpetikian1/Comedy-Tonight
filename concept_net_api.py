@@ -87,7 +87,6 @@ def get_types_from_animal(animal: str) -> List:
         f"http://api.conceptnet.io/query?start=/c/en/{lower_animal}/n/wn/animal&rel=/r/IsA&limit=1000"
     )
     obj = response.json()
-    
     types = [edge["end"]["label"] for edge in obj["edges"]]
     return types
 
