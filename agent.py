@@ -34,6 +34,7 @@ class Agent:
         return
 
     def couldnt_find(self):
+        self.counter = 0
         choice = random.choice(self.domains)
         while choice == self.domain:
             choice = random.choice(self.domains)
