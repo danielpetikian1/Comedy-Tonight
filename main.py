@@ -29,10 +29,19 @@ def main():
         print("AGENT ONE: ")
         print(f"{agent_one_animal} - {agent_one_why} \n")
         ### NOW FOR AGENT TWO
-        print(agent_1.get_current_animal())
-        agent_two_animal: str = agent_2.generate_what_sentence(
-            agent_1.get_current_animal()
-        )
+        temp_agent_two_animal: str = None
+        if agent_1.get_current_animal() is not None:
+
+            temp_agent_two_animal = agent_2.generate_what_sentence()
+            if temp_agent_two_animal not in animal_dict:
+                agent_two_animal: str = temp_agent_two_animal
+            else:
+                continue
+        else:
+
+            agent_two_animal: str = agent_2.generate_what_sentence(
+                agent_1.get_current_animal()
+            )
         # add this to the animal dictionary
         animal_dict[agent_two_animal] = agent_two_animal
         agent_two_why: str = agent_2.generate_why_sentence()

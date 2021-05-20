@@ -13,8 +13,21 @@ class Agent:
         self.animal_dict = {}
         self.domain_switcher = True
         self.counter = 1
-        self.domain = 'insect'
-        self.domains = ['fish', 'reptile', 'birds', 'mythical_being', 'big_cat', 'insect','canine']
+        self.why_counter = 0
+        self.domain = "rodent"
+        self.domains = [
+            "fish",
+            "ape",
+            "monkey",
+            "rodent",
+            "herd_animal",
+            "reptile",
+            "birds",
+            "big_cat",
+            "insect",
+            "canine",
+        ]
+        # self.domains = ['fish' ,'ape', 'monkey','rodent','reptile', 'birds', 'mythical_being', 'big_cat', 'insect','canine','herd_animal']
 
     def get_current_animal(self):
         """
@@ -25,6 +38,14 @@ class Agent:
     def switch_domain(self):
         if self.domain_switcher == False:
             return
+        choice = random.choice(self.domains)
+        while choice == self.domain:
+            choice = random.choice(self.domains)
+        self.domain = choice
+        return
+
+    def couldnt_find(self):
+        self.counter = 0
         choice = random.choice(self.domains)
         while choice == self.domain:
             choice = random.choice(self.domains)
@@ -42,6 +63,7 @@ class Agent:
             self.switch_domain()
         # if an arg was not provided, it is the first run
         while True:
+            # print('counter,', self.why_counter)
             if animal == None:
                 # old query = self.current_animal = random.choice(get_related_to(random.choice(get_animals_from_type("bird"))))
                 animal_query = get_related_to(self.domain)
@@ -49,30 +71,48 @@ class Agent:
                 if temp_animal not in self.animal_dict:
                     self.current_animal = temp_animal
                     # print(self.current_animal)
+                    self.why_counter += 1
+
                     if self.check_if_why_exits() == True:
                         # return the current animal
+                        self.why_counter = 0
                         return self.current_animal
                     # if not, just do it again
                     self.animal_dict[temp_animal] = temp_animal
+                    if self.why_counter > 8:
+                        self.couldnt_find()
+                        self.why_counter = 0
                 else:
+                    self.why_counter += 1
+                    if self.why_counter > 8:
+                        self.couldnt_find()
+                        self.why_counter = 0
                     continue
 
             # if the first run
             else:
                 # get the type of the previous animal
                 animal_query = get_types_from_animal(animal)
-                for i in range(len(animal_query)):
-                    temp_animal = animal_query[i].lower()
-                    print(temp_animal)
-                    if temp_animal in self.animal_dict:
-                        continue
-                    else:
-                        self.animal_dict[temp_animal] = temp_animal
-                        self.current_animal = temp_animal
-                        # print(self.current_animal)
-                        if self.check_if_why_exits() == True:
-                            return self.current_animal
-                continue
+                temp_animal = random.choice(animal_query)
+                if temp_animal not in self.animal_dict:
+                    self.current_animal = temp_animal
+                    # print(self.current_animal)
+                    self.why_counter += 1
+                    if self.check_if_why_exits() == True:
+                        # return the current animal
+                        self.why_counter = 0
+                        return self.current_animal
+                    # if not, just do it again
+                    self.animal_dict[temp_animal] = temp_animal
+                    if self.why_counter > 8:
+                        self.couldnt_find()
+                        self.why_counter = 0
+                else:
+                    self.why_counter += 1
+                    if self.why_counter > 8:
+                        self.couldnt_find()
+                        self.why_counter = 0
+                    continue
 
     def generate_why_sentence(self) -> str:
         """
@@ -87,7 +127,6 @@ class Agent:
 
         self.counter += 1
         return why_sentence
-
 
     def check_if_why_exits(self) -> bool:
         """
