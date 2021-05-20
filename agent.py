@@ -18,7 +18,7 @@ class Agent:
         """
         return self.current_animal
 
-    def generate_what_sentence(self, animal: str = "") -> str:
+    def generate_what_sentence(self, animal: str or None = None) -> str:
         """
         Generate what sentence takes a type and returns a new animal of that type
         Returns an animal of the type animal the first time around
@@ -26,40 +26,36 @@ class Agent:
         IMPROVEMENTS: Make it so we do not call the API after each check for lack of why sentence
         """
         # if an arg was not provided, it is the first run
-        why_exists = False
-        while why_exists == False:
-            if animal == "":
+        while True:
+            if animal == None:
                 # old query = self.current_animal = random.choice(get_related_to(random.choice(get_animals_from_type("bird"))))
-                animal_query = get_related_to("bird")
+                animal_query = get_related_to("food")
                 temp_animal = random.choice(animal_query)
                 if temp_animal not in self.animal_dict:
                     self.current_animal = temp_animal
                     # print(self.current_animal)
                     if self.check_if_why_exits() == True:
-                        why_exists = True
                         # return the current animal
                         return self.current_animal
                     # if not, just do it again
                     self.animal_dict[temp_animal] = temp_animal
-                    continue
                 else:
                     continue
 
             # if the first run
             else:
                 # get the type of the previous animal
+                print("THIS IS THE ANIMAL BEING GIVEN: ", animal)
                 animal_query = get_types_from_animal(animal)
-                temp_animal = random.choice(animal_query(animal))
+                temp_animal = random.choice(animal_query)
                 if temp_animal not in self.animal_dict:
                     self.current_animal = temp_animal
                     # print(self.current_animal)
                     if self.check_if_why_exits() == True:
-                        why_exists = True
                         # return the current animal
                         return self.current_animal
                     # if not, continue
                     self.animal_dict[temp_animal] = temp_animal
-                    continue
                 else:
                     continue
 
