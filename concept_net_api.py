@@ -59,7 +59,7 @@ def get_capable(animal: str) -> List:
     )
     obj = response.json()
     # Looping though the edges
-    capabilities = [edge["start"]["label"] for edge in obj["edges"]]
+    capabilities = [edge["end"]["label"] for edge in obj["edges"]]
     return capabilities
 
 def filter_helper(object: str, fltr: str):
