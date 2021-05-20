@@ -11,12 +11,18 @@ class Agent:
     def __init__(self) -> None:
         self.current_animal = None
         self.animal_dict = {}
+        self.counter = 0
+        self.domain = 'big_cat'
+        self.domains = ['fish', 'reptile', 'birds', 'mythical_being', 'big_cat', 'insect','canine']
 
     def get_current_animal(self):
         """
         Get the current animal
         """
         return self.current_animal
+
+    def switch_domain(self):
+        return
 
     def generate_what_sentence(self, animal: str or None = None) -> str:
         """
@@ -29,7 +35,7 @@ class Agent:
         while True:
             if animal == None:
                 # old query = self.current_animal = random.choice(get_related_to(random.choice(get_animals_from_type("bird"))))
-                animal_query = get_related_to("food")
+                animal_query = get_related_to(self.domain)
                 temp_animal = random.choice(animal_query)
                 if temp_animal not in self.animal_dict:
                     self.current_animal = temp_animal
@@ -69,7 +75,10 @@ class Agent:
             why_sentence: str = random.choice(why_sentence_choices)
         else:
             why_sentence = "No reason found!"
+
+        self.counter += 1
         return why_sentence
+
 
     def check_if_why_exits(self) -> bool:
         """
