@@ -25,8 +25,8 @@ class Agent:
 
     def generate_what_gpt(self):
         while True:
-            what_animal = "".join(get_animal()).lower().strip()
-            if what_animal != None or len(what_animal) >= 4:
+            what_animal = "".join(get_animal().strip()).lower()
+            if what_animal != None or len(what_animal) >= 5:
                 if what_animal not in self.animal_dict:
                     # print("WHAT ANIMAL:", what_animal)
                     return what_animal
@@ -43,11 +43,12 @@ class Agent:
         for i in range(len(query)):
             if query[i] is not None:
                 # ASSUMES THAT THIS IS GOING TO RETURN SOMETHING
-                if len(get_animals_from_class(query[i])) > 0:
+                if len(get_animals_from_class(query[i])) > 1:
                     concept_net_response: str = random.choice(
                         get_animals_from_class(query[i])
                     )
-                    return concept_net_response
+                    # print("CN!")
+                    return concept_net_response.strip()
         # if this does not work, rely on GPT to get the next animal:
         fallback = self.generate_what_gpt()
         # print("GPT!")
