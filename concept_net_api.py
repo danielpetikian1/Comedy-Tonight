@@ -8,15 +8,15 @@ def main():
     # print the animals that are related to this thing
     print(get_related_to("donkey"))
     # call this if we need to categorize the current animal
-    print(get_classes_from_animal("donkey"))
+    print(get_classes_from_animal("cat"))
     # call this if we need to find some new animal
     print(get_animals_from_class(get_classes_from_animal("donkey")[2]))
 
-    print(get_related_to("pinto"))
+    print(get_related_to("horse"))
     # call this if we need to categorize the current animal
-    print(get_classes_from_animal("pinto"))
+    print(get_classes_from_animal("horse"))
     # call this if we need to find some new animal
-    print(get_animals_from_class(get_classes_from_animal("pinto")[0]))
+    print(get_animals_from_class(get_classes_from_animal("horse")[0]))
 
 
 def get_related_to(arg: str) -> list:
@@ -51,7 +51,7 @@ def get_classes_from_animal(animal: str) -> list:
     """
     lower_type = animal.lower()
     response = requests.get(
-        f"http://api.conceptnet.io/query?start=/c/en/{lower_type}/n&rel=/r/IsA&limit=1000"
+        f"http://api.conceptnet.io/query?start=/c/en/{lower_type}/n/wn/animal&rel=/r/IsA&limit=1000"
     )
     obj = response.json()
     animals = [edge["end"]["label"] for edge in obj["edges"]]

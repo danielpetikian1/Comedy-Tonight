@@ -25,9 +25,10 @@ class Agent:
 
     def generate_what_gpt(self):
         while True:
-            what_animal = get_animal()
-            if what_animal is not None:
+            what_animal = "".join(get_animal()).lower().strip()
+            if what_animal != None or len(what_animal) >= 4:
                 if what_animal not in self.animal_dict:
+                    # print("WHAT ANIMAL:", what_animal)
                     return what_animal
                 self.animal_dict[what_animal] = what_animal
             continue
@@ -36,14 +37,20 @@ class Agent:
         """
         Generates an animal that is similar to the argument animal via concept net
         """
-        query = get_classes_from_animal(animal)
+        # print("animal:", animal)
+        query = get_classes_from_animal("".join(animal).strip())
+        # print(query)
         for i in range(len(query)):
             if query[i] is not None:
                 # ASSUMES THAT THIS IS GOING TO RETURN SOMETHING
-                return random.choice(get_animals_from_class(query))
+                if len(get_animals_from_class(query[i])) > 0:
+                    concept_net_response: str = random.choice(
+                        get_animals_from_class(query[i])
+                    )
+                    return concept_net_response
         # if this does not work, rely on GPT to get the next animal:
         fallback = self.generate_what_gpt()
-        print("FALLBACK:", fallback)
+        # print("GPT!")
         return fallback
 
     def generate_why_sentence(self) -> str:
