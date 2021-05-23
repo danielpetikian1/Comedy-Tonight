@@ -49,5 +49,6 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
-# .env
+# .env and other add-ons manually
 *.env
+.vscode/
