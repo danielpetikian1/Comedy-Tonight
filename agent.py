@@ -1,9 +1,14 @@
 import random
+from gpt_api import (
+    get_animal,
+    get_single_why,
+    get_comparison_why,
+    get_insane_comparison_why,
+)
 from concept_net_api import (
-    get_capable,
-    get_types_from_animal,
-    get_animals_from_type,
     get_related_to,
+    get_animals_from_class,
+    get_classes_from_animal,
 )
 
 
@@ -11,130 +16,46 @@ class Agent:
     def __init__(self) -> None:
         self.current_animal = None
         self.animal_dict = {}
-        self.domain_switcher = True
-        self.counter = 1
-        self.why_counter = 0
-        self.domain = "rodent"
-        self.domains = [
-            "fish",
-            "ape",
-            "monkey",
-            "rodent",
-            "herd_animal",
-            "reptile",
-            "birds",
-            "big_cat",
-            "insect",
-            "canine",
-        ]
-        # self.domains = ['fish' ,'ape', 'monkey','rodent','reptile', 'birds', 'mythical_being', 'big_cat', 'insect','canine','herd_animal']
 
-    def get_current_animal(self):
-        """
-        Get the current animal
-        """
+    def _get_current_animal(self) -> None:
         return self.current_animal
 
-    def switch_domain(self):
-        if self.domain_switcher == False:
-            return
-        choice = random.choice(self.domains)
-        while choice == self.domain:
-            choice = random.choice(self.domains)
-        self.domain = choice
-        return
+    def _set_current_animal(self, animal: str) -> None:
+        self.current_animal = animal
 
-    def couldnt_find(self):
-        self.counter = 0
-        choice = random.choice(self.domains)
-        while choice == self.domain:
-            choice = random.choice(self.domains)
-        self.domain = choice
-        return
-
-    def generate_what_sentence(self, animal: str or None = None) -> str:
-        """
-        Generate what sentence takes a type and returns a new animal of that type
-        Returns an animal of the type animal the first time around
-
-        IMPROVEMENTS: Make it so we do not call the API after each check for lack of why sentence
-        """
-        if self.counter % 3 == 0:
-            self.switch_domain()
-        # if an arg was not provided, it is the first run
+    def generate_what_gpt(self):
         while True:
-            # print('counter,', self.why_counter)
-            if animal == None:
-                # old query = self.current_animal = random.choice(get_related_to(random.choice(get_animals_from_type("bird"))))
-                animal_query = get_related_to(self.domain)
-                temp_animal = random.choice(animal_query)
-                if temp_animal not in self.animal_dict:
-                    self.current_animal = temp_animal
-                    # print(self.current_animal)
-                    self.why_counter += 1
+            what_animal = get_animal()
+            if what_animal is not None:
+                if what_animal not in self.animal_dict:
+                    return what_animal
+                self.animal_dict[what_animal] = what_animal
+            continue
 
-                    if self.check_if_why_exits() == True:
-                        # return the current animal
-                        self.why_counter = 0
-                        return self.current_animal
-                    # if not, just do it again
-                    self.animal_dict[temp_animal] = temp_animal
-                    if self.why_counter > 8:
-                        self.couldnt_find()
-                        self.why_counter = 0
-                else:
-                    self.why_counter += 1
-                    if self.why_counter > 8:
-                        self.couldnt_find()
-                        self.why_counter = 0
-                    continue
-
-            # if the first run
-            else:
-                # get the type of the previous animal
-                animal_query = get_types_from_animal(animal)
-                temp_animal = random.choice(animal_query)
-                if temp_animal not in self.animal_dict:
-                    self.current_animal = temp_animal
-                    # print(self.current_animal)
-                    self.why_counter += 1
-                    if self.check_if_why_exits() == True:
-                        # return the current animal
-                        self.why_counter = 0
-                        return self.current_animal
-                    # if not, just do it again
-                    self.animal_dict[temp_animal] = temp_animal
-                    if self.why_counter > 8:
-                        self.couldnt_find()
-                        self.why_counter = 0
-                else:
-                    self.why_counter += 1
-                    if self.why_counter > 8:
-                        self.couldnt_find()
-                        self.why_counter = 0
-                    continue
+    def generate_what_concept_net(self, animal: str) -> str:
+        """
+        Generates an animal that is similar to the argument animal via concept net
+        """
+        query = get_classes_from_animal(animal)
+        for i in range(len(query)):
+            if query[i] is not None:
+                # ASSUMES THAT THIS IS GOING TO RETURN SOMETHING
+                return random.choice(get_animals_from_class(query))
+        # if this does not work, rely on GPT to get the next animal:
+        fallback = self.generate_what_gpt()
+        print("FALLBACK:", fallback)
+        return fallback
 
     def generate_why_sentence(self) -> str:
         """
         Generate a why sentence based on the current animal
         """
-        current_animal = self.current_animal
-        why_sentence_choices = get_capable(current_animal)
-        if len(why_sentence_choices) > 0:
-            why_sentence: str = random.choice(why_sentence_choices)
-        else:
-            why_sentence = "No reason found!"
+        return get_single_why(self.current_animal)
 
-        self.counter += 1
-        return why_sentence
+    def generate_why_sentence_comparison(self, animal_1: str, animal_2: str) -> str:
+        return get_comparison_why(animal_1, animal_2)
 
-    def check_if_why_exits(self) -> bool:
-        """
-        Check and see if this animal has some corresponding why sentence
-        If it does, return true, else false
-        """
-        current_animal = self.current_animal
-        why_sentence_choices = get_capable(current_animal)
-        if len(why_sentence_choices) > 0:
-            return True
-        return False
+    def generate_insane_why_sentence_comparison(
+        self, animal_1: str, animal_2: str
+    ) -> str:
+        return get_insane_comparison_why(animal_1, animal_2)

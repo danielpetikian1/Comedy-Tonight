@@ -1,58 +1,49 @@
 from agent import Agent
-import time
 
 
 def main():
+    # define agents
     agent_1 = Agent()
     agent_2 = Agent()
-    agent_1.domain_switcher = False
-    # keep track of time of execution
-    start_time = time.time()
-    # keep track of already mentioned animals
+    # keep track of iterations and animals mentioned
+    iterations = 0
+    num_iterations = 4
     animal_dict = {}
-    iterations: int = 0
-    print("Comedy Tonight Script Generator v1.1: \n")
-    # number of iterations
-    while iterations < 4:
-        agent_1.domain = agent_2.domain
-        # check to see if the current animal is not none
+    while iterations < num_iterations:
+        # if the first run
         if iterations == 0:
-            agent_one_animal: str = agent_1.generate_what_sentence()
-        else:
-            agent_one_animal: str = agent_1.generate_what_sentence(
-                agent_2.get_current_animal()
+            # agent 1 gets a brand new animal
+            agent_1._set_current_animal(agent_1.generate_what_gpt())
+            print(
+                f"I think the best pet is the {agent_1._get_current_animal()}. {agent_1.generate_why_sentence()}"
             )
-        # add this to the animal dictionary
-        animal_dict[agent_one_animal] = agent_one_animal
-        agent_one_why: str = agent_1.generate_why_sentence()
-        # print to console
-        print("AGENT ONE: ")
-        print(f"{agent_one_animal} - {agent_one_why} \n")
-        ### NOW FOR AGENT TWO
-        temp_agent_two_animal: str = None
-        if agent_1.get_current_animal() is not None:
-
-            temp_agent_two_animal = agent_2.generate_what_sentence()
-            if temp_agent_two_animal not in animal_dict:
-                agent_two_animal: str = temp_agent_two_animal
-            else:
-                continue
-        else:
-
-            agent_two_animal: str = agent_2.generate_what_sentence(
-                agent_1.get_current_animal()
+            # give agent two some new animal. this is based on agent 1's previous animal
+            agent_2._set_current_animal(
+                agent_2.generate_what_concept_net(agent_1._get_current_animal())
             )
-        # add this to the animal dictionary
-        animal_dict[agent_two_animal] = agent_two_animal
-        agent_two_why: str = agent_2.generate_why_sentence()
-        # print to console
-        print("AGENT TWO: ")
-        print(f"{agent_two_animal} - {agent_two_why} \n")
+            print(
+                f"Well I think the best pet is the {agent_2._get_current_animal()}. {agent_2.generate_why_sentence_comparison(agent_1._get_current_animal(), agent_2._get_current_animal())}"
+            )
+        # if not we can just run through
+        else:
+            # agent 1 gets a brand new animal
+            print("AGENT 1\n")
+            agent_1._set_current_animal(
+                agent_1.generate_what_concept_net(agent_2._get_current_animal())
+            )
+            print(
+                f"How about the {agent_1._get_current_animal()}. {agent_1.generate_why_sentence_comparison(agent_2._get_current_animal, agent_1._get_current_animal)}"
+            )
+            print("AGENT 2\n")
+            # give agent two some new animal. this is based on agent 1's previous animal
+            agent_2._set_current_animal(
+                agent_2.generate_what_concept_net(agent_1._get_current_animal())
+            )
+            print(
+                f"What about the {agent_2._get_current_animal()}. {agent_2.generate_why_sentence_comparison(agent_1._get_current_animal(), agent_2._get_current_animal())}"
+            )
+        # iterate
         iterations += 1
-    # print the time results
-    total_run_time_seconds = time.time() - start_time
-    print(f"TOTAL TIME IN SECONDS: {total_run_time_seconds} seconds")
-    print(f"TOTAL TIME IN MINUTES: {total_run_time_seconds/60} minutes")
 
 
 if __name__ == "__main__":
