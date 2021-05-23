@@ -16,6 +16,8 @@ class Agent:
     def __init__(self) -> None:
         self.current_animal = None
         self.animal_dict = {}
+        self.insane_comparison = False
+        self.cn_loop_check = 0
 
     def _get_current_animal(self) -> None:
         return self.current_animal
@@ -48,9 +50,16 @@ class Agent:
                         get_animals_from_class(query[i])
                     )
                     # print("CN!")
+                    self.insane_comparison = False
                     return concept_net_response.strip()
+            self.cn_loop_check += 1
+            if self.cn_loop_check > 10:
+                self.cn_loop_check = 0
+                break
         # if this does not work, rely on GPT to get the next animal:
         fallback = self.generate_what_gpt()
+        # UN-COMMENT THIS TO MAKE MORE CREATIVE - MIGHT BACKFIRE SO USE w/ CAUTION
+        # self.insane_comparison = True
         # print("GPT!")
         return fallback
 

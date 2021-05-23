@@ -7,7 +7,7 @@ def main():
     agent_2 = Agent()
     # keep track of iterations and animals mentioned
     iterations = 0
-    num_iterations = 4
+    num_iterations = 20
     animal_dict = {}
     while iterations < num_iterations:
         # if the first run
@@ -34,9 +34,14 @@ def main():
                 )
                 agent_two_animal = agent_2._get_current_animal()
                 if agent_two_animal not in animal_dict:
-                    print(
-                        f"Well I think the best pet is the {agent_two_animal}. {agent_2.generate_why_sentence_comparison(agent_1._get_current_animal(), agent_2._get_current_animal())}"
-                    )
+                    if agent_2.insane_comparison:
+                        print(
+                            f"Well I think the best pet is the {agent_two_animal}. {agent_2.generate_insane_why_sentence_comparison(agent_1._get_current_animal(), agent_2._get_current_animal())}"
+                        )
+                    else:
+                        print(
+                            f"Well I think the best pet is the {agent_two_animal}. {agent_2.generate_why_sentence_comparison(agent_1._get_current_animal(), agent_2._get_current_animal())}"
+                        )
                     animal_dict[agent_two_animal] = agent_two_animal
                     break
                 else:
@@ -51,9 +56,14 @@ def main():
                 )
                 agent_one_animal = agent_1._get_current_animal()
                 if agent_one_animal not in animal_dict:
-                    print(
-                        f"How about the {agent_one_animal}. {agent_1.generate_why_sentence_comparison(agent_2._get_current_animal(), agent_1._get_current_animal())}"
-                    )
+                    if agent_1.insane_comparison:
+                        print(
+                            f"How about the {agent_one_animal}. {agent_1.generate_insane_why_sentence_comparison(agent_2._get_current_animal(), agent_1._get_current_animal())}"
+                        )
+                    else:
+                        print(
+                            f"How about the {agent_one_animal}. {agent_1.generate_why_sentence_comparison(agent_2._get_current_animal(), agent_1._get_current_animal())}"
+                        )
                     animal_dict[agent_one_animal] = agent_one_animal
                     break
                 else:
@@ -66,9 +76,14 @@ def main():
                 # print("AGENT 2\n")
                 # give agent two some new animal. this is based on agent 1's previous animal
                 if agent_two_animal not in animal_dict:
-                    print(
-                        f"What about the {agent_two_animal}. {agent_2.generate_why_sentence_comparison(agent_1._get_current_animal(), agent_2._get_current_animal())}"
-                    )
+                    if agent_2.insane_comparison:
+                        print(
+                            f"What about the {agent_two_animal}. {agent_2.generate_insane_why_sentence_comparison(agent_1._get_current_animal(), agent_2._get_current_animal())}"
+                        )
+                    else:
+                        print(
+                            f"What about the {agent_two_animal}. {agent_2.generate_why_sentence_comparison(agent_1._get_current_animal(), agent_2._get_current_animal())}"
+                        )
                     animal_dict[agent_two_animal] = agent_two_animal
                     break
                 else:

@@ -27,9 +27,9 @@ def get_animal() -> str:
     """
     response = openai.Completion.create(
         engine="davinci",
-        prompt="I am an trivia-loving bot. If you ask me to name an animal, I will give you the name of an animal.\n\n\nInput: Name an animal\nOutput:",
-        temperature=0.5,
-        max_tokens=40,
+        prompt="I am a trivia-loving bot. If you ask me to name an animal, I will give you the name of an animal.\n\n\nInput: Name an animal\nOutput:",
+        temperature=0.9,
+        max_tokens=50,
         top_p=1,
         frequency_penalty=0.2,
         presence_penalty=0,
