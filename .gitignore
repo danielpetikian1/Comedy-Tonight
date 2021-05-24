@@ -51,4 +51,5 @@ docs/_build/
 
 # .env and other add-ons manually
 *.env
-.vscode/
+.vscode
+node_modules
