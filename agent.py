@@ -4,6 +4,7 @@ from gpt_api import (
     get_single_why,
     get_comparison_why,
     get_insane_comparison_why,
+    random_name_generator,
 )
 from concept_net_api import (
     get_related_to,
@@ -14,10 +15,14 @@ from concept_net_api import (
 
 class Agent:
     def __init__(self) -> None:
+        self.name = random_name_generator()
         self.current_animal = None
         self.animal_dict = {}
         self.insane_comparison = False
         self.cn_loop_check = 0
+
+    def _get_name(self) -> str:
+        return self.name
 
     def _get_current_animal(self) -> None:
         return self.current_animal

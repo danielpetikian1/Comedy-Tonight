@@ -7,9 +7,11 @@ def main():
     agent_2 = Agent()
     # keep track of iterations and animals mentioned
     iterations = 0
-    num_iterations = 10
+    num_iterations = 12
     animal_dict = {}
     while iterations < num_iterations:
+        agent_1_name = agent_1._get_name()
+        agent_2_name = agent_2._get_name()
         # if the first run
         if iterations == 0:
             # all of the while loops check for instances where the animal that has been brought up exists in the dict
@@ -21,7 +23,7 @@ def main():
                 # print(agent_one_animal, "IS THE ANIMAL")
                 if agent_one_animal not in animal_dict:
                     print(
-                        f"I think the best pet is the {agent_one_animal}. {agent_1.generate_why_sentence()}"
+                        f"{agent_1_name}: I think the best pet is the {agent_one_animal}. {agent_1.generate_why_sentence()}"
                     )
                     animal_dict[agent_one_animal] = agent_one_animal
                     break
@@ -36,11 +38,11 @@ def main():
                 if agent_two_animal not in animal_dict:
                     if agent_2.insane_comparison:
                         print(
-                            f"Well I think the best pet is the {agent_two_animal}. {agent_2.generate_insane_why_sentence_comparison(agent_1._get_current_animal(), agent_2._get_current_animal())}"
+                            f"{agent_2_name}: Well I think the best pet is the {agent_two_animal}. {agent_2.generate_insane_why_sentence_comparison(agent_1._get_current_animal(), agent_2._get_current_animal())}"
                         )
                     else:
                         print(
-                            f"Well I think the best pet is the {agent_two_animal}. {agent_2.generate_why_sentence_comparison(agent_1._get_current_animal(), agent_2._get_current_animal())}"
+                            f"{agent_2_name}: Well I think the best pet is the {agent_two_animal}. {agent_2.generate_why_sentence_comparison(agent_1._get_current_animal(), agent_2._get_current_animal())}"
                         )
                     animal_dict[agent_two_animal] = agent_two_animal
                     break
@@ -58,11 +60,11 @@ def main():
                 if agent_one_animal not in animal_dict:
                     if agent_1.insane_comparison:
                         print(
-                            f"How about the {agent_one_animal}. {agent_1.generate_insane_why_sentence_comparison(agent_2._get_current_animal(), agent_1._get_current_animal())}"
+                            f"{agent_1_name}: How about the {agent_one_animal}. {agent_1.generate_insane_why_sentence_comparison(agent_2._get_current_animal(), agent_1._get_current_animal())}"
                         )
                     else:
                         print(
-                            f"How about the {agent_one_animal}. {agent_1.generate_why_sentence_comparison(agent_2._get_current_animal(), agent_1._get_current_animal())}"
+                            f"{agent_1_name}: How about the {agent_one_animal}. {agent_1.generate_why_sentence_comparison(agent_2._get_current_animal(), agent_1._get_current_animal())}"
                         )
                     animal_dict[agent_one_animal] = agent_one_animal
                     break
@@ -78,11 +80,11 @@ def main():
                 if agent_two_animal not in animal_dict:
                     if agent_2.insane_comparison:
                         print(
-                            f"What about the {agent_two_animal}. {agent_2.generate_insane_why_sentence_comparison(agent_1._get_current_animal(), agent_2._get_current_animal())}"
+                            f"{agent_2_name}: What about the {agent_two_animal}. {agent_2.generate_insane_why_sentence_comparison(agent_1._get_current_animal(), agent_2._get_current_animal())}"
                         )
                     else:
                         print(
-                            f"What about the {agent_two_animal}. {agent_2.generate_why_sentence_comparison(agent_1._get_current_animal(), agent_2._get_current_animal())}"
+                            f"{agent_2_name}: What about the {agent_two_animal}. {agent_2.generate_why_sentence_comparison(agent_1._get_current_animal(), agent_2._get_current_animal())}"
                         )
                     animal_dict[agent_two_animal] = agent_two_animal
                     break

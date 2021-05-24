@@ -16,6 +16,7 @@ def main():
     # test generation
     animal_1 = "horse"
     animal_2 = "tyrannosaurus rex"
+    print(random_name_generator())
     print(get_single_why(animal_1))
     print(get_comparison_why(animal_1, animal_2))
     print(get_insane_comparison_why(animal_1, animal_2))
@@ -108,6 +109,20 @@ def get_insane_comparison_why(arg1: str, arg2: str) -> str:
         return get_insane_comparison_why(arg1, arg2)
     else:
         return response.choices[0].text
+
+
+def random_name_generator() -> str:
+    response = openai.Completion.create(
+        engine="davinci",
+        prompt="This is a random name generator\n\nRandom name: David\nRandom name: Sophia\nRandom name: Grace:\nRandom name:",
+        temperature=0.5,
+        max_tokens=60,
+        top_p=1.0,
+        frequency_penalty=0.0,
+        presence_penalty=0.0,
+        stop=["\n"],
+    )
+    return response.choices[0].text
 
 
 if __name__ == "__main__":
