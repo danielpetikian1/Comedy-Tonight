@@ -48,24 +48,24 @@ class Agent:
         query = get_classes_from_animal("".join(animal).strip())
         # print(query)
         for i in range(len(query)):
+            self.cn_loop_check += 1
+            if self.cn_loop_check > 10:
+                self.cn_loop_check = 0
+                break
             if query[i] is not None:
                 # ASSUMES THAT THIS IS GOING TO RETURN SOMETHING
                 if len(get_animals_from_class(query[i])) > 1:
                     concept_net_response: str = random.choice(
                         get_animals_from_class(query[i])
                     )
-                    # print("CN!")
+                    print("CN!")
                     self.insane_comparison = False
                     return concept_net_response.strip()
-            self.cn_loop_check += 1
-            if self.cn_loop_check > 10:
-                self.cn_loop_check = 0
-                break
         # if this does not work, rely on GPT to get the next animal:
         fallback = self.generate_what_gpt()
         # UN-COMMENT THIS TO MAKE MORE CREATIVE - MIGHT BACKFIRE SO USE w/ CAUTION
         # self.insane_comparison = True
-        # print("GPT!")
+        print("GPT!")
         return fallback
 
     def generate_why_sentence(self) -> str:
