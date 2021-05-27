@@ -48,10 +48,6 @@ class Agent:
         query = get_classes_from_animal("".join(animal).strip())
         # print(query)
         for i in range(len(query)):
-            self.cn_loop_check += 1
-            if self.cn_loop_check > 10:
-                self.cn_loop_check = 0
-                break
             if query[i] is not None:
                 # ASSUMES THAT THIS IS GOING TO RETURN SOMETHING
                 if len(get_animals_from_class(query[i])) > 1:
@@ -60,6 +56,10 @@ class Agent:
                     )
                     print("CN!")
                     self.insane_comparison = False
+                    self.cn_loop_check += 1
+                    if self.cn_loop_check > 10:
+                        self.cn_loop_check = 0
+                        break
                     return concept_net_response.strip()
         # if this does not work, rely on GPT to get the next animal:
         fallback = self.generate_what_gpt()
