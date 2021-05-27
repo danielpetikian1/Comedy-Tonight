@@ -7,7 +7,7 @@ def main():
     agent_2 = Agent()
     # keep track of iterations and animals mentioned
     iterations = 0
-    num_iterations = 12
+    num_iterations = 6
     animal_dict = {}
     while iterations < num_iterations:
         agent_1_name = agent_1._get_name()
