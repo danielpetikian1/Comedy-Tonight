@@ -36,7 +36,7 @@ def get_animal() -> str:
         presence_penalty=0,
         stop=["\n"],
     )
-    animal = response.choices[0].text
+    animal = response.choices[0].text.replace('"','')
     #this is pretty much just filtering 
     if (not animal.strip().isalpha()) or (len(animal.split()) > 2) or (chr(65533) in animal):
         return get_animal()
