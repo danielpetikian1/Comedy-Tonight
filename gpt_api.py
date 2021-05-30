@@ -44,8 +44,9 @@ def get_animal() -> str:
     #removing 'a ' so like 'a dog' will turn into just 'dog'
     if animal[0:2] == "a ":
         animal = animal[2:]
+    elif animal[0:3] == "an ":
+        animal  = animal[3:]
     return animal
-
 
 def get_single_why(arg: str) -> str:
     """
