@@ -22,6 +22,11 @@ def main():
                 agent_one_animal = agent_1._get_current_animal()
                 # print(agent_one_animal, "IS THE ANIMAL")
                 if agent_one_animal not in animal_dict:
+                    """
+                    IN FLASK
+                    - when this is triggered, do something link document.createElement(create a div tag with the character name and the shit below)
+                    - do this: https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement
+                    """
                     print(
                         f"{agent_1_name}: I think the best pet is the {agent_one_animal}."
                     )
