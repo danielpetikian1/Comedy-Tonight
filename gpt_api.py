@@ -36,8 +36,17 @@ def get_animal() -> str:
         presence_penalty=0,
         stop=["\n"],
     )
-    return response.choices[0].text
+    animal = response.choices[0].text.replace('"','')
+    #this is pretty much just filtering 
+    if (not animal.strip().isalpha()) or (len(animal.split()) > 2) or (chr(65533) in animal):
+        return get_animal()
 
+    #removing 'a ' so like 'a dog' will turn into just 'dog'
+    if animal[0:2] == "a ":
+        animal = animal[2:]
+    elif animal[0:3] == "an ":
+        animal  = animal[3:]
+    return animal
 
 def get_single_why(arg: str) -> str:
     """
