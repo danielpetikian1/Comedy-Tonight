@@ -9,7 +9,7 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <p>My Penguin = {window.penguin}</p>
+        <p>My Data = {window.token}</p>
         <a
           className="App-link"
           href="https://reactjs.org"
@@ -21,6 +21,16 @@ function App() {
       </header>
     </div>
   );
+}
+
+/**
+ *
+ * @param {*} props
+ * @returns
+ */
+function ScriptParagraph(props) {
+  const { text } = props.paragraph;
+  return <p>{text}</p>;
 }
 
 export default App;

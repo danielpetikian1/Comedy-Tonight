@@ -48,7 +48,6 @@ def get_animal() -> str:
         animal  = animal[3:]
     return animal
 
-
 def get_single_why(arg: str) -> str:
     """
     Function that takes arg1 and returns a string explaining why that argument would make a good pet
