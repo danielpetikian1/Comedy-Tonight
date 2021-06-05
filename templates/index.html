@@ -6,8 +6,8 @@
       name="viewport"
       content="width=device-width, initial-scale=1"
     />
-    <title>screenplay.css</title>
-    <link rel="stylesheet" href="screenplay.css" />
+    <title>styles.css</title>
+    <link rel="stylesheet" href="/static/styles.css" />
     <link rel="shortcut icon" href="favicon.ico" />
   </head>
   <body>
@@ -15,31 +15,25 @@
       <div class="page-number">1.</div>
       <div class="page-content">
         <!-- Slugline and action set the stage -->
-        <div class="slugline">Int. Fire Station - Night</div>
+        <div class="slugline">Evanston Firehouse</div>
         <div class="action">
           The fire truck pulls in, lights flashing silently. An air of defeat
-          hangs over the men.
+          hangs over the firefighters.
         </div>
         <!-- Character and dialogue go back and fourth like this -->
-        <div class="character">Chief Patterson</div>
+        <div class="character">{{data.agent_1_name}}</div>
         <!-- Parenthetical is someone that talks to himself/herself in some way -->
-        <div class="parenthetical">( to himself )</div>
-        <div class="dialog">Stop forgetting the hose.</div>
-        <!-- Character and dialogue are back and fourth like this -->
-        <div class="character">Laurel</div>
-        <div class="dialog">I've never done anything like this before.</div>
-        <div class="character">Armando</div>
-        <div class="dialog">You're going to be fine.</div>
-        <div class="character">George</div>
-        <div class="dialog">Tell me why we can't date again?</div>
-        <div class="character">Nadia</div>
-        <div class="dialog">I'm not attracted to you.</div>
-        <div class="character">George</div>
+        <div class="parenthetical">( to him/herself )</div>
         <div class="dialog">
-          Not attracted meaning repulsed? Or not attracted meaning you've never
-          considered how hot I am.
+          {{data.what_sentence_agent_1}}. {{data.why_sentence_agent_1}}.
         </div>
-        <div class="slugline">Ext. Georga and Nadia's Wedding - Continuous</div>
+        <!-- Character and dialogue are back and fourth like this -->
+        <div class="character">{{data.agent_2_name}}</div>
+        <div class="dialog">{{data.what_sentence_agent_2}}. {{data.why_sentence_agent_2}}.</div>
+        <div class="slugline">
+          Ext. {{data.agent_1_name}} and {{data.agent_2_name}}. The onlookers
+          return to their stations.
+        </div>
       </div>
     </div>
     <div class="page right">
