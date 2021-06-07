@@ -7,6 +7,8 @@ from gpt_api import (
     random_name_generator,
 )
 from concept_net_api import (
+    get_class_of_object,
+    get_object_from_class,
     get_related_to,
     get_animals_from_class,
     get_classes_from_animal,
@@ -44,9 +46,11 @@ class Agent:
         """
         Generates an animal that is similar to the argument animal via concept net
         """
+        #print('the animal is',animal)
         # print("animal:", animal)
-        query = get_classes_from_animal("".join(animal).strip())
+        query = get_classes_from_animal("".join(animal.split()[-1]).strip())
         # print(query)
+        print('query', query)
         for i in range(len(query)):
             if query[i] is not None:
                 # ASSUMES THAT THIS IS GOING TO RETURN SOMETHING
@@ -54,18 +58,35 @@ class Agent:
                     concept_net_response: str = random.choice(
                         get_animals_from_class(query[i])
                     )
-                    print("CN!")
+                    #print("CN!")
                     self.insane_comparison = False
                     self.cn_loop_check += 1
                     if self.cn_loop_check > 10:
+                        
                         self.cn_loop_check = 0
                         break
                     return concept_net_response.strip()
+        
+        try:
+            #print('we are here')
+            #getting the class from the object
+            clss = get_class_of_object(animal.split()[-1], self.animal_dict)
+            obj = get_object_from_class(clss, self.animal_dict)
+            #print(f"animal: {animal}, class: {clss}, new obj: {obj}")
+            #print('\n\n\n\n')
+            return obj.strip()
+        except:
+            pass
+        
+        
         # if this does not work, rely on GPT to get the next animal:
+        
         fallback = self.generate_what_gpt()
+        while (chr(65533) in fallback) or (not fallback.isalpha()):
+            fallback = self.generate_what_gpt()
         # UN-COMMENT THIS TO MAKE MORE CREATIVE - MIGHT BACKFIRE SO USE w/ CAUTION
         # self.insane_comparison = True
-        print("GPT!")
+        #print("GPT!")
         return fallback
 
     def generate_why_sentence(self) -> str:
