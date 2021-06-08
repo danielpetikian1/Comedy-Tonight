@@ -4,9 +4,10 @@ from agent import Agent
 
 app = Flask(__name__)
 
-# add as the root route
+
 @app.route("/")
 def index():
+    # call run_program below, populate params
     name_data, data, data_length = run_program()
     # render the template and pass in the parameters
     return render_template(
