@@ -9,6 +9,12 @@
     <title>CT3</title>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="shortcut icon" href="favicon.ico" />
+    <!-- REFRESH FUNCTION -->
+    <script>
+      function refresh(){
+        window.location.reload(true);
+      }
+    </script>
   </head>
   <body>
     <div class="page left">
@@ -25,12 +31,12 @@
         <!-- Character and dialogue go back and fourth like this -->
         <ol>
           {% for i in range(data_length) %}
-          <!-- agent one -->
-          <div class="character">{{name_data.agent_1_name}}</div>
-          <div class="dialog">{{data[i][0]}}. {{data[i][1]}}</div>
-          <!-- agent two -->
-          <div class="character">{{name_data.agent_2_name}}</div>
-          <div class="dialog">{{data[i][2]}}. {{data[i][3]}}</div>
+            <!-- agent one -->
+            <div class="character">{{name_data.agent_1_name}}</div>
+            <div class="dialog">{{data[i][0]}}. {{data[i][1]}}</div>
+            <!-- agent two -->
+            <div class="character">{{name_data.agent_2_name}}</div>
+            <div class="dialog">{{data[i][2]}}. {{data[i][3]}}</div>
           {% endfor %}
         </ol>
         <!-- Parenthetical (if we need it) ( to him/herself )</div> -->
@@ -47,6 +53,11 @@
           Developed by Mason Secky-Koebel, ...
         </p>
         <div style="display: inline">
+          <form>
+            <button onclick="refresh()" class="button" type="submit">
+              Reset
+            </button>
+          </form>
           <!-- Handle reset button onclick event 
           <button class="button">Generate</button>
           <button class="button">Reset</button>

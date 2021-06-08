@@ -1,21 +1,22 @@
 from flask import Flask
 from flask.templating import render_template
 from agent import Agent
+import time
 
 app = Flask(__name__)
 
 
 @app.route("/")
-def index():
+def index(iterations=1):
     # call run_program below, populate params
-    name_data, data, data_length = run_program()
+    name_data, data, data_length = run_program(iterations)
     # render the template and pass in the parameters
     return render_template(
         "index.html", name_data=name_data, data=data, data_length=data_length
     )
 
-
-def run_program():
+# run the main program
+def run_program(iter_number):
     # define agents
     agent_1 = Agent()
     agent_2 = Agent()
@@ -27,11 +28,13 @@ def run_program():
     }
     # keep track of iterations and animals mentioned
     iterations = 0
-    num_iterations = 3
+    num_iterations = iter_number
     # define data
     data = [] * num_iterations
     # animal dictionary
     animal_dict = {}
+    # time of execution
+    start_time = time.time()
     while iterations < num_iterations:
         # console
         print(f"starting iteration {iterations + 1}...")
@@ -139,6 +142,9 @@ def run_program():
     # last console instruction
     print(
         f"Script generated successfully! Open http://127.0.0.1:8080/ on your browser to view script"
+    )
+    print(
+        f"Execution time: {(time.time() - start_time)/60} minutes, {(time.time() - start_time)} seconds"
     )
     return name_data, data, num_iterations
 
