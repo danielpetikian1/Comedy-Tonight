@@ -50,7 +50,7 @@ class Agent:
         # print("animal:", animal)
         query = get_classes_from_animal("".join(animal.split()[-1]).strip())
         # print(query)
-        print('query', query)
+        #print('query', query)
         for i in range(len(query)):
             if query[i] is not None:
                 # ASSUMES THAT THIS IS GOING TO RETURN SOMETHING
@@ -58,20 +58,32 @@ class Agent:
                     concept_net_response: str = random.choice(
                         get_animals_from_class(query[i])
                     )
-                    #print("CN!")
+                    print("CN!")
                     self.insane_comparison = False
                     self.cn_loop_check += 1
                     if self.cn_loop_check > 10:
                         
                         self.cn_loop_check = 0
                         break
-                    return concept_net_response.strip()
+
+                    clss = concept_net_response.strip()
+                    if clss[0:2] == "a " or clss[0:2] == "A ":
+                        clss = clss[2:]
+                    elif clss[0:3] == "an " or clss[0:3] == "An ":
+                        clss  = clss[3:]
+
+                    return clss
         
         try:
-            #print('we are here')
+            print('we are here')
             #getting the class from the object
             clss = get_class_of_object(animal.split()[-1], self.animal_dict)
+            print('curr class', clss)
+            clss = get_class_of_object(clss, self.animal_dict)
+            print('higher class', clss)
             obj = get_object_from_class(clss, self.animal_dict)
+            obj = get_object_from_class(obj, self.animal_dict)
+            print('new obj', obj)
             #print(f"animal: {animal}, class: {clss}, new obj: {obj}")
             #print('\n\n\n\n')
             return obj.strip()
@@ -86,8 +98,14 @@ class Agent:
             fallback = self.generate_what_gpt()
         # UN-COMMENT THIS TO MAKE MORE CREATIVE - MIGHT BACKFIRE SO USE w/ CAUTION
         # self.insane_comparison = True
-        #print("GPT!")
-        return fallback
+        print("GPT!")
+        clss = fallback
+        if clss[0:2] == "a " or clss[0:2] == "A ":
+            clss = clss[2:]
+        elif clss[0:3] == "an " or clss[0:3] == "An ":
+            clss  = clss[3:]
+
+        return clss
 
     def generate_why_sentence(self) -> str:
         """

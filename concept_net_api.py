@@ -19,6 +19,12 @@ def main():
     # print(get_animals_from_class(get_classes_from_animal("horse")[0]))
    
     # print(get_object_from_class('big cat',[]))
+
+    x = 'elephant'
+    print(x)
+    x = get_class_of_object(x,{})
+    print(x)
+    print(get_class_of_object(x,{}))
     print('##########')
     for i in ['dog','eagle','wolf','cat','insect','hawk','tiger','wolf']:
         print(get_class_of_object(i,{}))
@@ -131,7 +137,7 @@ def get_class_of_object(object: str, dictofsaid):
     
     ###IMPORTANT: the commented section above are multiple of Daniel's tries to make it more generalized using different attributes. Issues that keep on getting
     ###           run into are weird domain changes like eagle -> score (from golf)
-    while (clss  == obj or curr_label is None or (not (clss == 'animal')) and (not 'animal' in curr_label)):# or (not first in curr_label) or (not second in curr_label)):
+    while (clss in dictofsaid or clss  == obj or curr_label is None or (not (clss == 'animal')) and (not 'animal' in curr_label)):# or (not first in curr_label) or (not second in curr_label)):
         weights.pop(weights.index(max(weights)))
         classes.pop(weights.index(max(weights)))
         clss_labels.pop(weights.index(max(weights)))
@@ -143,7 +149,7 @@ def get_class_of_object(object: str, dictofsaid):
     elif clss[0:3] == "an " or clss[0:3] == "An ":
         clss  = clss[3:]
 
-    
+    dictofsaid[clss] = clss
     
     return clss
 
