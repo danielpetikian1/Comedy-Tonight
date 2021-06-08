@@ -84,12 +84,17 @@ class Agent:
             clss = get_class_of_object(clss, self.animal_dict)
             print('higher class:', clss)
             obj = get_object_from_class(clss, self.animal_dict)
-            print('lower class:', obj)
-            obj = get_object_from_class(obj, self.animal_dict)
-            print('new obj:', obj)
+            
+            try:
+                obj2 = get_object_from_class(obj, self.animal_dict)
+                print('lower class:', obj)
+                print('new obj1:', obj2)
+                return obj2.strip()
+            except:
             #print(f"animal: {animal}, class: {clss}, new obj: {obj}")
             #print('\n\n\n\n')
-            return obj.strip()
+                print('new obj2:', obj)
+                return obj.strip()
         except:
             pass
         
