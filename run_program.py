@@ -80,11 +80,11 @@ def main():
                 if agent_two_animal not in animal_dict:
                     if agent_2.insane_comparison:
                         print(
-                            f"{agent_2_name}: What about the {agent_two_animal}. {agent_2.generate_insane_why_sentence_comparison(agent_1._get_current_animal(), agent_2._get_current_animal())}"
+                            f"{agent_2_name}: What about the {agent_two_animal}.{agent_2.generate_insane_why_sentence_comparison(agent_1._get_current_animal(), agent_2._get_current_animal())}"
                         )
                     else:
                         print(
-                            f"{agent_2_name}: What about the {agent_two_animal}. {agent_2.generate_why_sentence_comparison(agent_1._get_current_animal(), agent_2._get_current_animal())}"
+                            f"{agent_2_name}: What about the {agent_two_animal}.{agent_2.generate_why_sentence_comparison(agent_1._get_current_animal(), agent_2._get_current_animal())}"
                         )
                     animal_dict[agent_two_animal] = agent_two_animal
                     break
