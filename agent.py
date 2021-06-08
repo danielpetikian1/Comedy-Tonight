@@ -88,12 +88,27 @@ class Agent:
             try:
                 obj2 = get_object_from_class(obj, self.animal_dict)
                 print('lower class:', obj)
-                print('new obj1:', obj2)
+                
+                if obj2[0:2] == "a " or obj2[0:2] == "A ":
+                        obj2 = obj2[2:]
+                elif obj2[0:3] == "an " or obj2[0:3] == "An ":
+                    obj2  = obj2[3:]
+
+                print('new object from lower class:', obj2)
+
                 return obj2.strip()
             except:
             #print(f"animal: {animal}, class: {clss}, new obj: {obj}")
             #print('\n\n\n\n')
-                print('new obj2:', obj)
+                
+
+                if obj[0:2] == "a " or obj[0:2] == "A ":
+                    obj = obj[2:]
+                elif obj[0:3] == "an " or obj[0:3] == "An ":
+                    obj  = obj[3:]
+
+                print('new object from higher class:', obj)
+
                 return obj.strip()
         except:
             pass
