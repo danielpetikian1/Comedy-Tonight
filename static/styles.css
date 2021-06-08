@@ -78,6 +78,12 @@ body {
   margin-bottom: 1em;
 }
 
+.slugline-introducing {
+  font-weight: 600;
+  font-family: Inter !important;
+  margin-bottom: 1em;
+}
+
 .character + .parenthetical,
 .character + .dialog,
 .parenthetical + .dialog {

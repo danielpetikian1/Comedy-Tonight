@@ -11,7 +11,7 @@
     <link rel="shortcut icon" href="favicon.ico" />
     <!-- REFRESH FUNCTION -->
     <script>
-      function refresh(){
+      function refresh() {
         window.location.reload(true);
       }
     </script>
@@ -31,12 +31,12 @@
         <!-- Character and dialogue go back and fourth like this -->
         <ol>
           {% for i in range(data_length) %}
-            <!-- agent one -->
-            <div class="character">{{name_data.agent_1_name}}</div>
-            <div class="dialog">{{data[i][0]}}. {{data[i][1]}}</div>
-            <!-- agent two -->
-            <div class="character">{{name_data.agent_2_name}}</div>
-            <div class="dialog">{{data[i][2]}}. {{data[i][3]}}</div>
+          <!-- agent one -->
+          <div class="character">{{name_data.agent_1_name}}</div>
+          <div class="dialog">{{data[i][0]}}. {{data[i][1]}}</div>
+          <!-- agent two -->
+          <div class="character">{{name_data.agent_2_name}}</div>
+          <div class="dialog">{{data[i][2]}}. {{data[i][3]}}</div>
           {% endfor %}
         </ol>
         <!-- Parenthetical (if we need it) ( to him/herself )</div> -->
@@ -48,13 +48,18 @@
     </div>
     <div class="page right">
       <div class="landing-content">
-        <h1 class="slugline">Comedy Tonight Script Generator</h1>
-        <p class="description-paragraph">
+        <h1 class="slugline-introducing">Comedy Tonight Script Generator</h1>
+        <p class="description-paragraph" style="font-family: Inter !important">
           Developed by Mason Secky-Koebel, ...
         </p>
         <div style="display: inline">
           <form>
-            <button onclick="refresh()" class="button" type="submit">
+            <button
+              onclick="refresh()"
+              class="button"
+              type="submit"
+              style="font-family: Inter !important"
+            >
               Reset
             </button>
           </form>
