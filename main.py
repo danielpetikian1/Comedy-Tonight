@@ -10,10 +10,12 @@ def index():
     name_data, data = run_program()
     # find the length of the data structure
     # take away 2 for the name
-    # data_length = len(data)
+    data_length = int(len(data) / 2)
     # this means data[i + 2] = agent_1_what_sentence
     # for i in range(data_length)
-    return render_template("index.html", name_data=name_data, data=data)
+    return render_template(
+        "index.html", name_data=name_data, data=data, data_length=data_length
+    )
 
 
 def run_program():

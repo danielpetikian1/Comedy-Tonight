@@ -23,7 +23,7 @@
         </div>
         <!-- Character and dialogue go back and fourth like this -->
         <ol>
-          {%for i in range(len(data_length))%}
+          {%for i in range(data_length)%}
           <!-- agent one -->
           <div class="character">{{name_data.agent_1_name}}</div>
           <div class="dialog">{{data[i][0]}}. {{data[i][1]}}</div>
@@ -32,16 +32,7 @@
           <div class="dialog">{{data[i + 1][0]}}. {{data[i + 1][1]}}</div>
           {%endfor%}
         </ol>
-        <div class="character">{{data.agent_1_name}}</div>
-        <!-- Parenthetical (if we need) ( to him/herself )</div> -->
-        <div class="dialog">
-          {{data.what_sentence_agent_1}}. {{data.why_sentence_agent_1}}.
-        </div>
-        <!-- Character and dialogue are back and fourth like this -->
-        <div class="character">{{data.agent_2_name}}</div>
-        <div class="dialog">
-          {{data.what_sentence_agent_2}}. {{data.why_sentence_agent_2}}.
-        </div>
+        <!-- Parenthetical (if we need it) ( to him/herself )</div> -->
         <!-- slugline (if we need it ) <div class="slugline">
           Ext. {{data.agent_1_name}} and {{data.agent_2_name}}. The onlookers
           return to their stations.
