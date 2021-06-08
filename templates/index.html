@@ -15,13 +15,23 @@
       <div class="page-number">1.</div>
       <div class="page-content">
         <!-- Slugline and action set the stage -->
-        <div class="slugline">Evanston Firehouse</div>
+        <div class="slugline">Evanston Firehouse: {{data_length}}</div>
         <div class="action">
           The fire truck pulls in, lights flashing silently. An air of defeat
           hangs over the firefighters. They decide to argue what pet they think
           is best.
         </div>
         <!-- Character and dialogue go back and fourth like this -->
+        <ol>
+          {%for i in range(len(data_length))%}
+          <!-- agent one -->
+          <div class="character">{{name_data.agent_1_name}}</div>
+          <div class="dialog">{{data[i][0]}}. {{data[i][1]}}</div>
+          <!-- agent two -->
+          <div class="character">{{name_data.agent_2_name}}</div>
+          <div class="dialog">{{data[i + 1][0]}}. {{data[i + 1][1]}}</div>
+          {%endfor%}
+        </ol>
         <div class="character">{{data.agent_1_name}}</div>
         <!-- Parenthetical (if we need) ( to him/herself )</div> -->
         <div class="dialog">
