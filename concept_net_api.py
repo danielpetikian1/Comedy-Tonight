@@ -161,7 +161,8 @@ def get_object_from_class(clss: str, dictofsaid):
     #str1 = "is related to " +  "[[" + domain + "]]"
     str2 = "is a type of " +  "[[" + domain + "]]"
     
-    edges = list(filter(lambda edge: not(edge['surfaceText'] == None) and not(edge['start']['label'] in dictofsaid.values()) and #(str1  in edge['surfaceText'] or \
+    edges = list(filter(lambda edge: not(edge['surfaceText'] == None) and ('sense_label' in edge['start'].keys()) and 'animal' in edge['start']['sense_label'] 
+    and not(edge['start']['label'] in dictofsaid.values()) and #(str1  in edge['surfaceText'] or \
     (str2 in edge['surfaceText']), file['edges']))
     lstofobjects = list(map(lambda edge: edge['start']['label'], edges))
     object_to_return = random.choice(lstofobjects)
