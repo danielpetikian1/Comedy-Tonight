@@ -7,31 +7,33 @@ app = Flask(__name__)
 # add as the root route
 @app.route("/")
 def index():
-    print("Running app...")
-    data = run_program()
-    return render_template("index.html", data=data)
+    name_data, data, data_length = run_program()
+    # render the template and pass in the parameters
+    return render_template(
+        "index.html", name_data=name_data, data=data, data_length=data_length
+    )
 
 
 def run_program():
     # define agents
     agent_1 = Agent()
     agent_2 = Agent()
-    # define the data array for one iteration
-    agent_pos = 0
-    data = {
+    # agent_pos % 2 == 1? This is agent one
+    # agent_pos % 2 == 0? This is agent one
+    name_data = {
         "agent_1_name": agent_1._get_name(),
         "agent_2_name": agent_2._get_name(),
-        "what_sentence_agent_1": "",
-        "why_sentence_agent_1": "I like it",
-        "what_sentence_agent_2": "",
-        "why_sentence_agent_2": "I like it more",
     }
     # keep track of iterations and animals mentioned
     iterations = 0
-    num_iterations = 1
+    num_iterations = 3
+    # define data
+    data = [] * num_iterations
+    # animal dictionary
     animal_dict = {}
     while iterations < num_iterations:
-        # if the first run
+        # if the first 
+        data.insert(iterations, [])
         if iterations == 0:
             # all of the while loops check for instances where the animal that has been brought up exists in the dict
             # and, if it does, just continue
@@ -41,12 +43,11 @@ def run_program():
                 agent_one_animal = agent_1._get_current_animal()
                 # print(agent_one_animal, "IS THE ANIMAL")
                 if agent_one_animal not in animal_dict:
-                    # add the what sentence to the array
-                    data[
-                        "what_sentence_agent_1"
-                    ] = f"I think the best pet is the {agent_one_animal}"
-                    # add the why sentence to the array
-                    data["why_sentence_agent_1"] = f"{agent_1.generate_why_sentence()}"
+                    # add what and why
+                    data[iterations].append(
+                        f"I think the best pet is the {agent_one_animal}"
+                    )
+                    data[iterations].append(f"{agent_1.generate_why_sentence()}")
                     animal_dict[agent_one_animal] = agent_one_animal
                     break
                 else:
@@ -59,22 +60,21 @@ def run_program():
                 agent_two_animal = agent_2._get_current_animal()
                 if agent_two_animal not in animal_dict:
                     if agent_2.insane_comparison:
-                        # add the what sentence for agent 2
-                        data[
-                            "what_sentence_agent_2"
-                        ] = f"Well I think the best pet is the {agent_two_animal}"
-                        # add the insane why sentence for agent 2
-                        data[
-                            "why_sentence_agent_2"
-                        ] = f"{agent_2.generate_insane_why_sentence_comparison(agent_1._get_current_animal(), agent_2._get_current_animal())}"
+                        # add what and insane why
+                        data[iterations].append(
+                            f"Well I think the best pet is the {agent_two_animal}"
+                        )
+                        data[iterations].append(
+                            f"{agent_2.generate_insane_why_sentence_comparison(agent_1._get_current_animal(), agent_2._get_current_animal())}"
+                        )
                     else:
-                        data[
-                            "what_sentence_agent_2"
-                        ] = f"Well I think the best pet is the {agent_two_animal}"
-                        # add the normal why sentence for agent 2, slightly different
-                        data[
-                            "why_sentence_agent_2"
-                        ] = f"{agent_2.generate_why_sentence_comparison(agent_1._get_current_animal(), agent_2._get_current_animal())}"
+                        # add what and why
+                        data[iterations].append(
+                            f"Well I think the best pet is the {agent_two_animal}"
+                        )
+                        data[iterations].append(
+                            f"{agent_2.generate_why_sentence_comparison(agent_1._get_current_animal(), agent_2._get_current_animal())}"
+                        )
                     animal_dict[agent_two_animal] = agent_two_animal
                     break
                 else:
@@ -90,23 +90,17 @@ def run_program():
                 agent_one_animal = agent_1._get_current_animal()
                 if agent_one_animal not in animal_dict:
                     if agent_1.insane_comparison:
-                        # add the basic what sentence for agent 1
-                        data[
-                            "what_sentence_agent_1"
-                        ] = f"How about the {agent_one_animal}"
-                        # add the insane why for agent 1
-                        data[
-                            "why_sentence_agent_1"
-                        ] = f"{agent_1.generate_insane_why_sentence_comparison(agent_2._get_current_animal(), agent_1._get_current_animal())}"
+                        # add what and insane why
+                        data[iterations].append(f"How about the {agent_one_animal}")
+                        data[iterations].append(
+                            f"{agent_1.generate_insane_why_sentence_comparison(agent_2._get_current_animal(), agent_1._get_current_animal())}"
+                        )
                     else:
-                        # add the basic what sentence for agent 1
-                        data[
-                            "what_sentence_agent_1"
-                        ] = f"How about the {agent_one_animal}"
-                        # generate a normal why sentence
-                        data[
-                            "why_sentence_agent_1"
-                        ] = f"{agent_1.generate_why_sentence_comparison(agent_2._get_current_animal(), agent_1._get_current_animal())}"
+                        # add what and why
+                        data[iterations].append(f"How about the {agent_one_animal}")
+                        data[iterations].append(
+                            f"{agent_1.generate_why_sentence_comparison(agent_2._get_current_animal(), agent_1._get_current_animal())}"
+                        )
                     animal_dict[agent_one_animal] = agent_one_animal
                     break
                 else:
@@ -120,30 +114,24 @@ def run_program():
                 # give agent two some new animal. this is based on agent 1's previous animal
                 if agent_two_animal not in animal_dict:
                     if agent_2.insane_comparison:
-                        # basic what sentence
-                        data[
-                            "what_sentence_agent_2"
-                        ] = f"How about the {agent_two_animal}"
-                        # add insane why sentence
-                        data[
-                            "why_sentence_agent_2"
-                        ] = f"{agent_2.generate_insane_why_sentence_comparison(agent_1._get_current_animal(), agent_2._get_current_animal())}"
+                        # add what and insane why
+                        data[iterations].append(f"How about the {agent_two_animal}")
+                        data[iterations].append(
+                            f"{agent_2.generate_insane_why_sentence_comparison(agent_1._get_current_animal(), agent_2._get_current_animal())}"
+                        )
                     else:
-                        # basic what sentence
-                        data[
-                            "what_sentence_agent_2"
-                        ] = f"How about the {agent_two_animal}"
-                        # add insane why sentence
-                        data[
-                            "why_sentence_agent_2"
-                        ] = f"{agent_2.generate_why_sentence_comparison(agent_1._get_current_animal(), agent_2._get_current_animal())}"
+                        # add what and why
+                        data[iterations].append(f"How about the {agent_two_animal}")
+                        data[iterations].append(
+                            f"{agent_2.generate_why_sentence_comparison(agent_1._get_current_animal(), agent_2._get_current_animal())}"
+                        )
                     animal_dict[agent_two_animal] = agent_two_animal
                     break
                 else:
                     continue
         # iterate
         iterations += 1
-    return data
+    return name_data, data, num_iterations
 
 
 if __name__ == "__main__":
