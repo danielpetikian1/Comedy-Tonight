@@ -18,22 +18,24 @@
         <div class="slugline">Evanston Firehouse</div>
         <div class="action">
           The fire truck pulls in, lights flashing silently. An air of defeat
-          hangs over the firefighters.
+          hangs over the firefighters. They decide to argue what pet they think
+          is best.
         </div>
         <!-- Character and dialogue go back and fourth like this -->
         <div class="character">{{data.agent_1_name}}</div>
-        <!-- Parenthetical is someone that talks to himself/herself in some way -->
-        <div class="parenthetical">( to him/herself )</div>
+        <!-- Parenthetical (if we need) ( to him/herself )</div> -->
         <div class="dialog">
           {{data.what_sentence_agent_1}}. {{data.why_sentence_agent_1}}.
         </div>
         <!-- Character and dialogue are back and fourth like this -->
         <div class="character">{{data.agent_2_name}}</div>
-        <div class="dialog">{{data.what_sentence_agent_2}}. {{data.why_sentence_agent_2}}.</div>
-        <div class="slugline">
+        <div class="dialog">
+          {{data.what_sentence_agent_2}}. {{data.why_sentence_agent_2}}.
+        </div>
+        <!-- slugline (if we need it ) <div class="slugline">
           Ext. {{data.agent_1_name}} and {{data.agent_2_name}}. The onlookers
           return to their stations.
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="page right">
@@ -41,6 +43,7 @@
         <h1 class="slugline">Comedy Tonight Script Generator</h1>
         <p class="description-paragraph">Developed by (names here)</p>
         <div style="display: inline">
+          <!-- Handle reset button onclick event -->
           <button class="button">Generate</button>
           <button class="button">Reset</button>
         </div>
