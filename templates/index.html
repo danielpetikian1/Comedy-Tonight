@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1"
     />
-    <title>styles.css</title>
+    <title>CT3</title>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="shortcut icon" href="favicon.ico" />
   </head>
@@ -15,38 +15,42 @@
       <div class="page-number">1.</div>
       <div class="page-content">
         <!-- Slugline and action set the stage -->
-        <div class="slugline">Evanston Firehouse: {{data_length}}</div>
+        <div class="slugline">Evanston Firehouse</div>
         <div class="action">
           The fire truck pulls in, lights flashing silently. An air of defeat
-          hangs over the firefighters. They decide to argue what pet they think
-          is best.
+          hangs over the firefighters. {{name_data.agent_1_name}} and
+          {{name_data.agent_2_name}} enter, still arguing about what pet they
+          think is the best.
         </div>
         <!-- Character and dialogue go back and fourth like this -->
         <ol>
           {% for i in range(data_length) %}
-            <!-- agent one -->
-            <div class="character">{{name_data.agent_1_name}}</div>
-            <div class="dialog">{{data[i][0]}}. {{data[i][1]}}</div>
-            <!-- agent two -->
-            <div class="character">{{name_data.agent_2_name}}</div>
-            <div class="dialog">{{data[i][2]}}. {{data[i][3]}}</div>
+          <!-- agent one -->
+          <div class="character">{{name_data.agent_1_name}}</div>
+          <div class="dialog">{{data[i][0]}}. {{data[i][1]}}</div>
+          <!-- agent two -->
+          <div class="character">{{name_data.agent_2_name}}</div>
+          <div class="dialog">{{data[i][2]}}. {{data[i][3]}}</div>
           {% endfor %}
         </ol>
         <!-- Parenthetical (if we need it) ( to him/herself )</div> -->
-        <!-- slugline (if we need it ) <div class="slugline">
-          Ext. {{data.agent_1_name}} and {{data.agent_2_name}}. The onlookers
-          return to their stations.
-        </div> -->
+        <div class="slugline">
+          Ext. {{name_data.agent_1_name}} and {{name_data.agent_2_name}}, still
+          arguing in the distance. The onlookers return to their stations.
+        </div>
       </div>
     </div>
     <div class="page right">
       <div class="landing-content">
         <h1 class="slugline">Comedy Tonight Script Generator</h1>
-        <p class="description-paragraph">Developed by (names here)</p>
+        <p class="description-paragraph">
+          Developed by Mason Secky-Koebel, ...
+        </p>
         <div style="display: inline">
-          <!-- Handle reset button onclick event -->
+          <!-- Handle reset button onclick event 
           <button class="button">Generate</button>
           <button class="button">Reset</button>
+          -->
         </div>
       </div>
     </div>

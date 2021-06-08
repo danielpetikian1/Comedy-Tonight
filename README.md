@@ -1,18 +1,13 @@
-# Comedy Tonight
+# Comedy Tonight (CPT3)
 
-This is a script generator. Below are the current TODO's:
+This is a script generator, made with concept net and GPT-3
 
-## Current TODO's
+## How to run
 
-We are going to jump past iterating on the DB we made and go straight to getting information from the internet.
-
-Before that we need to make some sort of 'state' system, or a way to keep track of the animals:
-
-- that have been said already
-- that have been said recently (last 5 animals max)
-
-Those functions need to be made - I would store the recent animals and the animals mentioned already in a class variable, and define a couple of methods that check those.
-
-Next, we need to define some kind of way we are going to get animals - probably some API. before that we need to come up with a "framework" for the kind of animal we get. this we need to meet on and go over as non-trivial and going to determine a lot (this was the numbering system I came up w/ but now we are using the internet so will not be the same).
-
-By the end of this week the state system must be done and we need to be getting animals from the internet in some semi-cohesive way.
+1. Clone the repo
+2. `cd` into the root directory
+3. Run `python -r requirements.txt` to install the correct dependencies
+4. In `main.py`, on line 39, enter the number of iterations by editing `num_iterations`. 4 iterations means a conversation that is 8 sentences long
+5. Run `main.py` with `python main.py`
+6. Open to port <http://127.0.0.1:8080/> in your browser to view
+5. Venmo @masonsecky-koebel $0.10 per run bc these API calls ain't cheap ;)

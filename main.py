@@ -32,7 +32,9 @@ def run_program():
     # animal dictionary
     animal_dict = {}
     while iterations < num_iterations:
-        # if the first 
+        # console
+        print(f"starting iteration {iterations + 1}...")
+        # if the first
         data.insert(iterations, [])
         if iterations == 0:
             # all of the while loops check for instances where the animal that has been brought up exists in the dict
@@ -45,7 +47,7 @@ def run_program():
                 if agent_one_animal not in animal_dict:
                     # add what and why
                     data[iterations].append(
-                        f"I think the best pet is the {agent_one_animal}"
+                        f"I still think the {agent_one_animal} is the best pet"
                     )
                     data[iterations].append(f"{agent_1.generate_why_sentence()}")
                     animal_dict[agent_one_animal] = agent_one_animal
@@ -62,7 +64,7 @@ def run_program():
                     if agent_2.insane_comparison:
                         # add what and insane why
                         data[iterations].append(
-                            f"Well I think the best pet is the {agent_two_animal}"
+                            f"Well how about the {agent_two_animal}"
                         )
                         data[iterations].append(
                             f"{agent_2.generate_insane_why_sentence_comparison(agent_1._get_current_animal(), agent_2._get_current_animal())}"
@@ -70,7 +72,7 @@ def run_program():
                     else:
                         # add what and why
                         data[iterations].append(
-                            f"Well I think the best pet is the {agent_two_animal}"
+                            f"Well how about the {agent_two_animal}"
                         )
                         data[iterations].append(
                             f"{agent_2.generate_why_sentence_comparison(agent_1._get_current_animal(), agent_2._get_current_animal())}"
@@ -91,7 +93,7 @@ def run_program():
                 if agent_one_animal not in animal_dict:
                     if agent_1.insane_comparison:
                         # add what and insane why
-                        data[iterations].append(f"How about the {agent_one_animal}")
+                        data[iterations].append(f"Ah, the {agent_one_animal}")
                         data[iterations].append(
                             f"{agent_1.generate_insane_why_sentence_comparison(agent_2._get_current_animal(), agent_1._get_current_animal())}"
                         )
@@ -115,13 +117,15 @@ def run_program():
                 if agent_two_animal not in animal_dict:
                     if agent_2.insane_comparison:
                         # add what and insane why
-                        data[iterations].append(f"How about the {agent_two_animal}")
+                        data[iterations].append(
+                            f"Nah, I'd say it's the {agent_two_animal}"
+                        )
                         data[iterations].append(
                             f"{agent_2.generate_insane_why_sentence_comparison(agent_1._get_current_animal(), agent_2._get_current_animal())}"
                         )
                     else:
                         # add what and why
-                        data[iterations].append(f"How about the {agent_two_animal}")
+                        data[iterations].append(f"The {agent_two_animal} is better")
                         data[iterations].append(
                             f"{agent_2.generate_why_sentence_comparison(agent_1._get_current_animal(), agent_2._get_current_animal())}"
                         )
@@ -131,6 +135,10 @@ def run_program():
                     continue
         # iterate
         iterations += 1
+    # last console instruction
+    print(
+        f"Script generated successfully! Open http://127.0.0.1:8080/ on your browser to view script"
+    )
     return name_data, data, num_iterations
 
 

@@ -36,17 +36,22 @@ def get_animal() -> str:
         presence_penalty=0,
         stop=["\n"],
     )
-    animal = response.choices[0].text.replace('"','')
-    #this is pretty much just filtering 
-    if (not animal.strip().isalpha()) or (len(animal.split()) > 2) or (chr(65533) in animal):
+    animal = response.choices[0].text.replace('"', "")
+    # this is pretty much just filtering
+    if (
+        (not animal.strip().isalpha())
+        or (len(animal.split()) > 2)
+        or (chr(65533) in animal)
+    ):
         return get_animal()
 
-    #removing 'a ' so like 'a dog' will turn into just 'dog'
+    # removing 'a ' so like 'a dog' will turn into just 'dog'
     if animal[0:2] == "a ":
         animal = animal[2:]
     elif animal[0:3] == "an ":
-        animal  = animal[3:]
+        animal = animal[3:]
     return animal
+
 
 def get_single_why(arg: str) -> str:
     """
@@ -54,7 +59,7 @@ def get_single_why(arg: str) -> str:
     """
     response = openai.Completion.create(
         engine="davinci",
-        prompt=f'I am a highly intelligent question answering bot. If you ask me a question that is rooted in truth, I will give you the answer. If you ask me a question that is nonsense, trickery or has no clear answer, I will respond with "I just like them, IDK".\n\nInput: Can you tell me something good about why the {arg} is a good pet?\nOutput:',
+        prompt=f'I am a highly intelligent question answering bot. If you ask me a question that is rooted in truth, I will give you the answer. If you ask me a question that is nonsense, trickery or has no clear answer, I will respond with "I just think their cool, honestly".\n\nInput: Can you tell me something good about why the {arg} is a good pet?\nOutput:',
         temperature=0.6,
         max_tokens=100,
         top_p=1,
@@ -78,7 +83,7 @@ def get_comparison_why(arg1: str, arg2: str) -> str:
     """
     response = openai.Completion.create(
         engine="davinci",
-        prompt=f'I am a highly intelligent question answering bot. If you ask me a question that is rooted in truth, I will give you the answer. If you ask me a question that is nonsense, trickery or has no clear answer, I will respond with "I just like them, IDK".\n\nInput: Why is the {arg2} a better pet than than the {arg1}?\nOutput:',
+        prompt=f'I am a highly intelligent question answering bot. If you ask me a question that is rooted in truth, I will give you the answer. If you ask me a question that is nonsense, trickery or has no clear answer, I will respond with "I just think their cool, honestly".\n\nInput: Why is the {arg2} a better pet than than the {arg1}?\nOutput:',
         temperature=0.4,
         max_tokens=100,
         top_p=1,
@@ -88,7 +93,7 @@ def get_comparison_why(arg1: str, arg2: str) -> str:
     )
     if (
         len(response.choices[0].text) < 20
-        or response.choices[0].text == "I just like them, IDK"
+        or response.choices[0].text == "I just think their cool, honestly"
     ):
         print("recurse")
         return get_comparison_why(arg1, arg2)
@@ -102,7 +107,7 @@ def get_insane_comparison_why(arg1: str, arg2: str) -> str:
     """
     response = openai.Completion.create(
         engine="davinci",
-        prompt=f'I am a highly intelligent question answering bot. If you ask me a question that is rooted in truth, I will give you the answer. If you ask me a question that is nonsense, trickery or has no clear answer, I will respond with "I just like them, IDK".\n\nInput: Why is the {arg2} a better pet than than the {arg1}?\nOutput:',
+        prompt=f'I am a highly intelligent question answering bot. If you ask me a question that is rooted in truth, I will give you the answer. If you ask me a question that is nonsense, trickery or has no clear answer, I will respond with "I just think their cool, honestly".\n\nInput: Why is the {arg2} a better pet than than the {arg1}?\nOutput:',
         temperature=0.7,
         max_tokens=100,
         top_p=1,
@@ -112,7 +117,7 @@ def get_insane_comparison_why(arg1: str, arg2: str) -> str:
     )
     if (
         len(response.choices[0].text) < 20
-        or response.choices[0].text == "I just like them, IDK"
+        or response.choices[0].text == "I just think their cool, honestly"
     ):
         print("recurse")
         return get_insane_comparison_why(arg1, arg2)
